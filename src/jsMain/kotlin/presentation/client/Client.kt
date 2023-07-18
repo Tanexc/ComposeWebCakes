@@ -1,12 +1,10 @@
 package presentation.client
 
-import core.di.clientModule
+import di.clientModule
 import io.ktor.client.*
-import io.ktor.client.plugins.BodyProgress.Plugin.install
 import io.ktor.client.plugins.cookies.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import kotlinx.browser.localStorage
 import presentation.features.application.components.BrowserViewportWindow
 import org.jetbrains.skiko.wasm.onWasmReady
 import org.koin.core.context.startKoin

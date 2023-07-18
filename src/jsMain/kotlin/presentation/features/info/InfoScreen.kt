@@ -24,28 +24,30 @@ import presentation.style.ui.theme.getTheme
 
 @Composable
 fun InfoScreen() {
-    val theme = getTheme(isSystemInDarkTheme())
+    val theme = getTheme(true)
     val getUserIdUseCase = GetUserIdUseCase()
 
     val userId = remember { mutableStateOf("") }
 
 
 
-        getUserIdUseCase().onEach {
-            KtorSimpleLogger("cum").info("yse")
-            userId.value = it
-        }.launchIn(CoroutineScope(Dispatchers.Default))
+    getUserIdUseCase().onEach {
+        userId.value = it
+    }.launchIn(CoroutineScope(Dispatchers.Default))
 
 
-    Box {
-        val state = rememberLazyListState()
+    val state = rememberLazyListState()
+    Box(modifier = Modifier.fillMaxWidth()) {
         LazyColumn(
-            modifier = Modifier,
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .align(Alignment.Center),
             state = state
         ) {
             item {
                 Box(modifier = Modifier
                     .fillMaxWidth()
+                    .align(Alignment.Center)
                 ) {
                     Row(modifier = Modifier
                         .wrapContentWidth()
@@ -55,13 +57,14 @@ fun InfoScreen() {
                             InfoCard(
                                 modifier = Modifier
                                     .padding(6.dp)
-                                    .width(720.dp)
+                                    .fillMaxWidth(0.5f)
                                     .height(324.dp),
                                 borderRadius = 16.dp,
                                 backgroundColor = theme.secondaryContainer.copy(0.3f)
                             ) {
                                 Box(modifier = Modifier
                                     .fillMaxSize()
+                                    .padding(16.dp)
                                 ) {
                                     Text(
                                         userId.value,
@@ -77,229 +80,14 @@ fun InfoScreen() {
                             InfoCard(
                                 modifier = Modifier
                                     .padding(6.dp)
-                                    .width(720.dp)
+                                    .fillMaxWidth()
                                     .height(324.dp),
                                 borderRadius = 16.dp,
                                 backgroundColor = theme.secondaryContainer.copy(0.3f)
                             ) {
                                 Box(modifier = Modifier
                                     .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-            item {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                ) {
-                    Row(modifier = Modifier
-                        .wrapContentWidth()
-                        .align(Alignment.Center)
-                    ) {
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-            item {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                ) {
-                    Row(modifier = Modifier
-                        .wrapContentWidth()
-                        .align(Alignment.Center)
-                    ) {
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-            item {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                ) {
-                    Row(modifier = Modifier
-                        .wrapContentWidth()
-                        .align(Alignment.Center)
-                    ) {
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-            item {
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                ) {
-                    Row(modifier = Modifier
-                        .wrapContentWidth()
-                        .align(Alignment.Center)
-                    ) {
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
-                                ) {
-                                    Text(
-                                        "INFOCARD",
-                                        modifier = Modifier
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-                        }
-
-                        Column(modifier = Modifier.align(Alignment.CenterVertically)) {
-                            InfoCard(
-                                modifier = Modifier
-                                    .padding(6.dp)
-                                    .width(720.dp)
-                                    .height(324.dp),
-                                borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
-                            ) {
-                                Box(modifier = Modifier
-                                    .fillMaxSize()
+                                    .padding(16.dp)
                                 ) {
                                     Text(
                                         "INFOCARD",
@@ -314,6 +102,7 @@ fun InfoScreen() {
                 }
             }
         }
+
         VerticalScrollbar(
             modifier = Modifier
                 .align(Alignment.CenterEnd)

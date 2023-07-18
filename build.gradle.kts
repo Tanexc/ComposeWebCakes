@@ -74,8 +74,6 @@ kotlin {
 
                 // Bcrypt
                 implementation("de.nycode:bcrypt:2.3.0")
-
-
             }
         }
 
