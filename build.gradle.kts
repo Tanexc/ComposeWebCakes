@@ -6,6 +6,8 @@ val skikoVersion: String by project
 val coroutinesVersion: String by project
 val skikoRuntimeVersion: String by project
 val koinVersion: String by project
+val exposedVersion: String by project
+val postgresqlVersion: String by project
 
 plugins {
     kotlin("multiplatform") version "1.8.0"
@@ -66,14 +68,12 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material3)
 
-                // Koin
-                implementation("io.insert-koin:koin-core:$koinVersion")
-
                 // Serialization
-                runtimeOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
                 // Bcrypt
                 implementation("de.nycode:bcrypt:2.3.0")
+
             }
         }
 
@@ -87,6 +87,9 @@ kotlin {
                 implementation("org.jetbrains.skiko:skiko-js:$skikoVersion")
                 implementation("org.jetbrains.skiko:skiko-js-runtime:$skikoRuntimeVersion")
 
+                // Koin
+                implementation("io.insert-koin:koin-core:$koinVersion")
+
                 dependsOn(commonMain)
             }
 
@@ -96,12 +99,30 @@ kotlin {
             dependencies {
 
                 // Ktor
-                implementation("io.ktor:ktor-server-netty:$ktorVersion")
+                implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
                 implementation("io.ktor:ktor-server-html-builder-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-server-websockets-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-server-sessions-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
+
+                // Exposed
+                implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+                implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+                implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+
+                // PostgreSQL
+                implementation("org.postgresql:postgresql:$postgresqlVersion")
+
+                // Html
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.8.1")
 
                 // Logs
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
+
+                // Koin
+                implementation("io.insert-koin:koin-ktor:$koinVersion")
 
                 dependsOn(commonMain)
             }

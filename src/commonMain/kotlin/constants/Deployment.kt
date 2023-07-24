@@ -1,5 +1,8 @@
 package constants
 
 object Deployment {
-    val HOST = "https://127.0.0.1:8080/"
+    const val HOST = "https://compose-web-cakes.netlify.app/"
+
+    const val BASE_UI_URL = "/"
+    const val BASE_UI_HTML_FILE = "index.html"
 }

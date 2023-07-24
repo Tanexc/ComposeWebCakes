@@ -3,7 +3,6 @@ package domain.interfaces
 import domain.model.Message
 import domain.model.Theme
 import io.ktor.client.*
-import io.ktor.http.*
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 

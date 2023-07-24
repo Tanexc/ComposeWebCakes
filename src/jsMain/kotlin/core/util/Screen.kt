@@ -1,8 +1,5 @@
 package core.util
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.ui.graphics.vector.ImageVector
 import presentation.style.icons.filled.IconFilledAssessment
 import presentation.style.icons.filled.IconFilledChat

@@ -1,8 +1,8 @@
 package constants
 
 object Database {
-    val URL = ""
-    val USER = ""
-    val PASSWORD = ""
-    val DRIVER = ""
+    const val jdbcURL = config.property("storage.jdbcURL").getString()
+    const val USER = ""
+    const val PASSWORD = ""
+    const val DRIVER = config.property("storage.driverClassName").getString()
 }
