@@ -1,34 +1,46 @@
 package presentation.style.strings
 
-import domain.interfaces.StringsPackage
+import domain.interfaces.StringResources
 
 sealed class Strings {
 
-    val app_name: Int = 0
-    val info: Int = 1
+    val appName: Int = 0
+    val aboutUs: Int = 1
     val chat: Int = 2
     val feedback: Int = 3
 
-    object EN: StringsPackage, Strings() {
+    object EN: StringResources, Strings() {
         override val strings = mapOf(
-            Pair(app_name, "WebComposeCake"),
-            Pair(info, "About us"),
+            Pair(appName, "WebComposeCake"),
+            Pair(aboutUs, "About us"),
             Pair(chat, "Chat"),
             Pair(feedback, "Feedback")
         )
+
+        override fun invoke(): Int = 0
+
     }
 
-    object RU: StringsPackage, Strings() {
+    object RU: StringResources, Strings() {
         override val strings = mapOf(
-            Pair(app_name, "WebComposeCake"),
-            Pair(info, "О нас"),
+            Pair(appName, "WebComposeCake"),
+            Pair(aboutUs, "О нас"),
             Pair(chat, "Чат"),
             Pair(feedback, "Отзывы")
         )
-    }
 
-    object VALUES: Strings()
+        override fun invoke(): Int = 1
+    }
 }
 
-val Locale = Strings.RU
+fun getResources(locale: Int): StringResources {
+    return when(locale) {
+        Strings.RU() -> Strings.RU
+        Strings.EN() -> Strings.EN
+        else -> {
+            Strings.EN
+        }
+    }
+}
+
 
