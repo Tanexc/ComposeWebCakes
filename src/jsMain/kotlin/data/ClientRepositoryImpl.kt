@@ -1,11 +1,12 @@
-package data.repository
+package data
 
 
 import constants.Api.GET_MESSAGE
 import constants.Api.GET_MESSAGES
 import constants.Deployment.HOST
 import core.util.HashTool.generateUserId
-import domain.interfaces.ClientRepository
+import domain.interfaces.StringResources
+import domain.repository.ClientRepository
 import domain.model.Message
 import domain.model.Theme
 import io.ktor.client.*
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.component.inject
 
-class ClientRepositoryImpl : ClientRepository {
+class ClientRepositoryImpl : ClientRepository<HttpClient> {
     override val client: HttpClient by inject()
 
     override fun getUserId(): Flow<String> = flow {
@@ -30,8 +31,6 @@ class ClientRepositoryImpl : ClientRepository {
         }
         emit(userId)
     }
-
-
 
     override fun getTheme(): Flow<Theme> = flow {
         var themeId = localStorage.getItem("themeId")?.toLong()
@@ -74,6 +73,19 @@ class ClientRepositoryImpl : ClientRepository {
 
     override fun postMessage(message: Message) {
         TODO("Not yet implemented")
+    }
+
+    override fun getLocale(): Int {
+        var locale = localStorage.getItem("locale")?.toInt()
+        if (locale == null) {
+            locale = 0
+            setLocale(locale)
+        }
+        return locale
+    }
+
+    override fun setLocale(localeId: Int) {
+        localStorage.setItem("locale", "$localeId")
     }
 
 

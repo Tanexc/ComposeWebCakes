@@ -1,4 +1,4 @@
-package ru.tanexc.application.domain.repository
+package domain.repository
 
 import domain.model.Chat
 import domain.model.Message

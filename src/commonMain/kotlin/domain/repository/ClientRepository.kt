@@ -1,13 +1,12 @@
-package domain.interfaces
+package domain.repository
 
 import domain.model.Message
 import domain.model.Theme
-import io.ktor.client.*
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 
-interface ClientRepository: KoinComponent {
-    val client: HttpClient
+interface ClientRepository<T>: KoinComponent {
+    val client: T
 
     fun getUserId(): Flow<String>
 
@@ -20,5 +19,9 @@ interface ClientRepository: KoinComponent {
     fun getMessage(id: Long): Flow<Message>
 
     fun postMessage(message: Message)
+
+    fun getLocale(): Int
+
+    fun setLocale(localeId: Int)
 
 }
