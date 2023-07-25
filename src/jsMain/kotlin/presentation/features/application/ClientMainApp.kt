@@ -11,17 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import core.util.Screen
+import domain.controller.SettingsController
+import presentation.features.application.controller.SettingsControllerImpl
 import presentation.features.chat.ChatScreen
 import presentation.features.info.InfoScreen
-import presentation.style.strings.Locale
 import presentation.style.ui.theme.Typography
-import presentation.style.ui.theme.getTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClientMainApp() {
-    val theme = getTheme(true)
-    val selectedItem: MutableState<Screen> = remember { mutableStateOf(Screen.Info) }
+    val settingsController: SettingsController = SettingsControllerImpl()
 
     val items = listOf(
         Screen.Info,
@@ -29,12 +28,14 @@ fun ClientMainApp() {
         Screen.Chat
     )
 
+    val selectedItem: MutableState<Screen> = remember { mutableStateOf(Screen.Info) }
+
     Scaffold {
         Row {
             Column {
                 NavigationRail(
                     modifier = Modifier
-                        .background(theme.secondaryContainer)
+                        .background(settingsController.theme.secondaryContainer)
                 ) {
                     items.forEach {
                         NavigationRailItem(
@@ -48,12 +49,12 @@ fun ClientMainApp() {
                                     } else {
                                         it.iconOutlined
                                     },
-                                    contentDescription = Locale(it.label)
+                                    contentDescription = settingsController.locale(it.label)
                                 )
                             },
                             label = {
                                 Text(
-                                    Locale(it.label),
+                                    settingsController.locale(it.label),
                                     fontSize = Typography.labelSmall.fontSize,
                                     fontWeight =
                                     if (it.label == selectedItem.value.label) {
@@ -77,7 +78,7 @@ fun ClientMainApp() {
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
-                        .background(theme.outline)
+                        .background(settingsController.theme.outline)
                 )
             }
             Column(

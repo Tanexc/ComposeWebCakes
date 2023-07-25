@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import ru.tanexc.application.domain.repository.ChatRepository
+import domain.repository.ChatRepository
 import util.State
 
 
