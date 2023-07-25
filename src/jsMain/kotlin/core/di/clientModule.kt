@@ -1,7 +1,7 @@
 package core.di
 
-import data.repository.ClientRepositoryImpl
-import domain.interfaces.ClientRepository
+import data.ClientRepositoryImpl
+import domain.repository.ClientRepository
 import io.ktor.client.*
 import org.koin.dsl.module
 
@@ -10,7 +10,7 @@ val clientModule = module {
         HttpClient()
     }
 
-    single<ClientRepository> {
+    single<ClientRepository<HttpClient>> {
         ClientRepositoryImpl()
     }
 }
