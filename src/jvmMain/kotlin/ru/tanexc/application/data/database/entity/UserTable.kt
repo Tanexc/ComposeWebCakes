@@ -19,13 +19,7 @@ object UserTable : Table(), DatabaseEntity {
     private val password = binary("password", length = 256)
     private val token = varchar("token",512)
 
-    override fun asDomain(data: ResultRow): Domain = User(
-        id = data[id],
-        name = data[name],
-        surname = data[surname],
-        chatIds = data[chatIds].split(" ").map { it.toLong() },
-        creationTimestamp = data[creationTimestamp],
-        password = data[password],
-        token = data[token]
-    )
+    override suspend fun asDomain(getResult: suspend (Table) -> ResultRow?): Domain? {
+        TODO()
+    }
 }
