@@ -29,6 +29,8 @@ repositories {
 
 }
 
+
+
 kotlin {
 
     jvm {
@@ -53,7 +55,9 @@ kotlin {
             }
         }
     }
+
     sourceSets {
+
         val commonMain by getting {
             dependencies {
 
@@ -74,6 +78,8 @@ kotlin {
                 // Bcrypt
                 implementation("de.nycode:bcrypt:2.3.0")
 
+                // Koin
+                implementation("io.insert-koin:koin-core:$koinVersion")
             }
         }
 
@@ -86,9 +92,6 @@ kotlin {
                 // Skiko
                 implementation("org.jetbrains.skiko:skiko-js:$skikoVersion")
                 implementation("org.jetbrains.skiko:skiko-js-runtime:$skikoRuntimeVersion")
-
-                // Koin
-                implementation("io.insert-koin:koin-core:$koinVersion")
 
                 dependsOn(commonMain)
             }
