@@ -37,6 +37,17 @@ class ChatDaoImpl : ChatDao {
             }
         }
 
+    override suspend fun getByUserId(userId: String): Chat? = ChatTable
+        .asDomain {
+            dbQuery {
+                it
+                    .select {
+                        ChatTable.userId eq userId
+                    }
+                    .firstOrNull()
+            }
+        }
+
     override suspend fun edit(chat: Chat): Unit = dbQuery {
         ChatTable
             .update(

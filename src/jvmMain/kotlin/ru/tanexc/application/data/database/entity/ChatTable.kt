@@ -11,6 +11,7 @@ object ChatTable: Table(), DatabaseEntity {
 
     override val primaryKey = PrimaryKey(id)
 
+    val userId = text("userId")
     val title = text("title").nullable()
     val messages = text("messages")
     val creationTimestamp = long("creationTimestamp")
@@ -23,6 +24,7 @@ object ChatTable: Table(), DatabaseEntity {
 
         return Chat(
             id = data[id],
+            userId = data[userId],
             messages = data[messages].split(" ").map { it.toLong() },
             creationTimestamp = data[creationTimestamp],
             newMessagesCount = data[newMessagesCount],

@@ -2,7 +2,7 @@ package ru.tanexc.application.presentation.websocket.controller
 
 import domain.model.Chat
 import domain.model.Message
-import domain.repository.ChatRepository
+import ru.tanexc.application.domain.repository.ChatRepository
 import io.ktor.http.*
 import io.ktor.server.websocket.*
 import kotlinx.coroutines.flow.Flow
