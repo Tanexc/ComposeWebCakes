@@ -1,4 +1,4 @@
-package ru.tanexc.application.core.utils
+package ru.tanexc.application.core.util
 
 import de.nycode.bcrypt.hash
 import de.nycode.bcrypt.verify
