@@ -10,5 +10,9 @@ interface UserDao {
 
     suspend fun edit(user: User)
 
+    suspend fun getByToken(token: String): User?
+
+    suspend fun getByLogin(login: String): User?
+
 
 }

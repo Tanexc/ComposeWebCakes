@@ -4,7 +4,6 @@ import domain.model.User
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.update
-import ru.tanexc.application.data.database.entity.ChatTable
 import ru.tanexc.application.data.database.entity.UserTable
 import ru.tanexc.application.data.database.factory.DatabaseFactory.dbQuery
 import ru.tanexc.application.domain.interfaces.UserDao
@@ -31,11 +30,11 @@ class UserDaoImpl : UserDao {
             dbQuery {
                 (table as UserTable)
                     .select {
-                        ChatTable.id eq id
+                        table.id eq id
                     }
                     .firstOrNull()
             }
-        }
+        }?.copy(password = ByteArray(0), chatIds = emptyList(), token = "")
 
     override suspend fun edit(user: User): Unit =
         dbQuery {
@@ -49,4 +48,26 @@ class UserDaoImpl : UserDao {
                     row[token] = user.token
                 }
         }
+
+    override suspend fun getByToken(token: String): User? = UserTable
+        .asDomain { table ->
+            dbQuery {
+                (table as UserTable)
+                    .select {
+                            table.token eq token
+                        }
+                    .firstOrNull()
+            }
+        }
+
+    override suspend fun getByLogin(login: String): User? = UserTable
+    .asDomain { table ->
+        dbQuery {
+            (table as UserTable)
+                .select {
+                    table.login eq login
+                }
+                .firstOrNull()
+        }
+    }
 }
