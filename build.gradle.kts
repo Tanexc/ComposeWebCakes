@@ -109,6 +109,7 @@ kotlin {
                 implementation("io.ktor:ktor-server-sessions-jvm:$ktorVersion")
                 implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
+                implementation("io.ktor:ktor-server-auth-jwt-jvm:$ktorVersion")
 
                 // Exposed
                 implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")

@@ -26,15 +26,6 @@ sealed class State<T>(
             message = message
         )
 
-    class Interrupted<T>(
-        data: T? = null,
-        message: String = "interrupted"
-    ) :
-        State<T>(
-            data = data,
-            message = message
-        )
-
     class Processing<T>(
         data: T? = null,
         message: String = "processing"
