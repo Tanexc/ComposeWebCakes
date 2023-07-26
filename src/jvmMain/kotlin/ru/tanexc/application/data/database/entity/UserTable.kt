@@ -13,6 +13,8 @@ object UserTable : Table(), DatabaseEntity {
 
     val name = text("title")
     val surname = text("surname")
+    val login = text("surname").uniqueIndex()
+
     val chatIds = text("chatIds")
     val creationTimestamp = long("creationTimestamp")
     val password = binary("password", length = 256)
