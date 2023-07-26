@@ -1,13 +1,14 @@
 package domain.model
 
 data class User(
-    val id: Long,
+    val id: Long = -1,
+    val login: String,
     val name: String,
     val surname: String,
-    val chatIds: List<Long>,
-    val creationTimestamp: Long,
-    val password: ByteArray,
-    val token: String
+    val chatIds: List<Long> = emptyList(),
+    val creationTimestamp: Long = 0,
+    val password: ByteArray = ByteArray(0),
+    val token: String = ""
 ): Domain {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -16,20 +17,25 @@ data class User(
         other as User
 
         if (id != other.id) return false
+        if (login != other.login) return false
         if (name != other.name) return false
         if (surname != other.surname) return false
         if (chatIds != other.chatIds) return false
         if (creationTimestamp != other.creationTimestamp) return false
-        return password.contentEquals(other.password)
+        if (!password.contentEquals(other.password)) return false
+        return token == other.token
     }
 
     override fun hashCode(): Int {
         var result = id.hashCode()
+        result = 31 * result + login.hashCode()
         result = 31 * result + name.hashCode()
         result = 31 * result + surname.hashCode()
         result = 31 * result + chatIds.hashCode()
         result = 31 * result + creationTimestamp.hashCode()
         result = 31 * result + password.contentHashCode()
+        result = 31 * result + token.hashCode()
         return result
     }
+
 }
