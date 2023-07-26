@@ -22,7 +22,6 @@ object DatabaseFactory {
             SchemaUtils.create(ChatTable)
             SchemaUtils.create(MessageTable)
             SchemaUtils.create(UserTable)
-
         }
     }
 

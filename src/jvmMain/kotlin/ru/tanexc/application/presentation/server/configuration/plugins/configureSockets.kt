@@ -1,8 +1,8 @@
 package ru.tanexc.application.presentation.server.configuration.plugins
 
+import io.ktor.server.application.*
 import io.ktor.server.websocket.*
 import java.time.Duration
-import io.ktor.server.application.*
 
 fun Application.configureSockets() {
     install(WebSockets) {

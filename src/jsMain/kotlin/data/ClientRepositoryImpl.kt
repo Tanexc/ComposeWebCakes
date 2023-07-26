@@ -5,10 +5,9 @@ import constants.Api.GET_MESSAGE
 import constants.Api.GET_MESSAGES
 import constants.Deployment.HOST
 import core.util.HashTool.generateUserId
-import domain.interfaces.StringResources
-import domain.repository.ClientRepository
 import domain.model.Message
 import domain.model.Theme
+import domain.repository.ClientRepository
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*

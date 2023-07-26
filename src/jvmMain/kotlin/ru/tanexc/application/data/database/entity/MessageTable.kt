@@ -1,6 +1,5 @@
 package ru.tanexc.application.data.database.entity
 
-import domain.model.Domain
 import domain.model.Message
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table

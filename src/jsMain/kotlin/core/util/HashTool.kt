@@ -1,7 +1,6 @@
 package core.util
 
 import io.ktor.util.*
-import io.ktor.utils.io.core.*
 import org.jetbrains.skiko.currentNanoTime
 import kotlin.random.Random
 

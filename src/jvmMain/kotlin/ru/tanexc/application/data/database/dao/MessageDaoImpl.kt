@@ -3,7 +3,6 @@ package ru.tanexc.application.data.database.dao
 import domain.model.Message
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectBatched
 import ru.tanexc.application.data.database.entity.MessageTable
 import ru.tanexc.application.data.database.factory.DatabaseFactory.dbQuery
 import ru.tanexc.application.domain.interfaces.MessageDao

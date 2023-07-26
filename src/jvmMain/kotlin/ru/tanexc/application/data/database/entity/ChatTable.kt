@@ -1,10 +1,9 @@
 package ru.tanexc.application.data.database.entity
 
 import domain.model.Chat
-import ru.tanexc.application.domain.interfaces.DatabaseEntity
-import domain.model.Domain
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
+import ru.tanexc.application.domain.interfaces.DatabaseEntity
 
 object ChatTable: Table(), DatabaseEntity {
 
