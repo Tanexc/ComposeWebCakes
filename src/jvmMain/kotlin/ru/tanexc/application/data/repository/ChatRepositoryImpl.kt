@@ -11,51 +11,55 @@ import org.koin.core.component.inject
 import ru.tanexc.application.domain.interfaces.ChatDao
 import ru.tanexc.application.domain.interfaces.MessageDao
 import util.State
+import util.exceptions.DataIsNull
 
 class ChatRepositoryImpl: ChatRepository, KoinComponent {
     private val chatDao: ChatDao by inject()
     private val messageDao: MessageDao by inject()
 
     override fun getChatByUserId(userId: String): Flow<State<Chat?>> = flow {
-        emit(State.Processing())
-        val chat = chatDao.getByUserId(userId)
-        if (chat == null) {
-            emit(State.Error())
-        } else {
+        try {
+            emit(State.Processing())
+            val chat = chatDao.getByUserId(userId)?: throw DataIsNull()
             emit(State.Success(chat))
+        } catch (e: Exception) {
+            emit(State.Error(message = e.message?: "getting chat by userId = $userId problem"))
         }
+
     }
 
     override fun createChat(userId: String): Flow<State<Chat>> = flow {
-        emit(State.Processing())
-        val chat: Chat? = chatDao.insert(
-            Chat(
-                id = -1L,
-                userId = userId,
-                title = "#${userId.substring(0, 8)}",
-                messages = emptyList(),
-                creationTimestamp = getTimeMillis(),
-                newMessagesCount = 0
-            )
-        )
-        if (chat == null) {
-            emit(State.Error())
-        } else {
+        try {
+            emit(State.Processing())
+
+            val chat: Chat = chatDao.insert(
+                Chat(
+                    id = -1L,
+                    userId = userId,
+                    title = "#${userId.substring(0, 8)}",
+                    messages = emptyList(),
+                    creationTimestamp = getTimeMillis(),
+                    newMessagesCount = 0
+                )
+            )?: throw DataIsNull()
+
             emit(State.Success(chat))
+        } catch (e: Exception) {
+            emit(State.Error(message = e.message?: "creating chat problem"))
         }
     }
 
     override fun insertMessage(chatData: Chat, data: Message): Flow<State<Chat>> = flow {
-        emit(State.Processing())
-        val message: Message? = messageDao.insert(data)
+        try {
+            emit(State.Processing())
+            val message: Message = messageDao.insert(data)?: throw DataIsNull()
 
-        if (message == null) {
-            emit(State.Error())
-        } else {
-            val chat: Chat = chatData.copy(messages = chatData.messages + data.id)
+            val chat: Chat = chatData.copy(messages = chatData.messages + message.id)
             chatDao.edit(chat)
             emit(State.Success(chat))
-        }
 
+        } catch (e: Exception) {
+            emit(State.Error(message = e.message?: "insert message problem"))
+        }
     }
 }

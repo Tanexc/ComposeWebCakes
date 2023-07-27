@@ -131,7 +131,7 @@ class UserRepositoryImpl : UserRepository, KoinComponent {
 
             emit(State.Success(user.copy(password = password)))
         } catch (e: Exception) {
-            emit(State.Error(message = e.message ?: "update token problem"))
+            emit(State.Error(message = e.message ?: "update password problem"))
         }
     }
 
@@ -145,7 +145,7 @@ class UserRepositoryImpl : UserRepository, KoinComponent {
             userDao.edit(user.copy(chatIds = user.chatIds + id))
             emit(State.Success(user.copy(chatIds = user.chatIds + id)))
         } catch (e: Exception) {
-            emit(State.Error(message = e.message ?: "update token problem"))
+            emit(State.Error(message = e.message ?: "update chats problem"))
         }
     }
 }
