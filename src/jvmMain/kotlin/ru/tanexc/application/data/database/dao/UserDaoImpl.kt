@@ -70,4 +70,12 @@ class UserDaoImpl : UserDao {
                 .firstOrNull()
         }
     }
+
+    override suspend fun isLoginAvailable(login: String): Boolean = dbQuery {
+        UserTable
+            .select {
+                UserTable.login eq login
+            }
+            .empty()
+    }
 }

@@ -14,5 +14,6 @@ interface UserDao {
 
     suspend fun getByLogin(login: String): User?
 
+    suspend fun isLoginAvailable(login: String): Boolean
 
 }
