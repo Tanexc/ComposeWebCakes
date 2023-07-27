@@ -10,4 +10,6 @@ interface MessageRepository {
 
     suspend fun getById(id: Long): Flow<State<Message?>>
 
+    suspend fun getByListId(listId: List<Long>): Flow<State<List<Message>>>
+
 }

@@ -36,4 +36,14 @@ class MessageRepositoryImpl: MessageRepository, KoinComponent {
         }
 
     }
+
+    override suspend fun getByListId(listId: List<Long>): Flow<State<List<Message>>> = flow {
+        try {
+            emit(State.Processing())
+            val messages: List<Message> = messageDao.getByIdList(listId)
+            emit(State.Success(messages))
+        } catch (e: Exception) {
+            emit(State.Error(message = e.message?: "getting messages problem"))
+        }
+    }
 }
