@@ -6,4 +6,6 @@ interface MessageDao {
     suspend fun insert(message: Message): Message?
 
     suspend fun getById(id: Long): Message?
+
+    suspend fun getByIdList(listId: List<Long>): List<Message>
 }
