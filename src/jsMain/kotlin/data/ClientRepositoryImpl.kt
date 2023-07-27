@@ -4,7 +4,7 @@ package data
 import constants.Api.GET_MESSAGE
 import constants.Api.GET_MESSAGES
 import constants.Deployment.HOST
-import core.util.HashTool.generateUserId
+import core.util.HashTool.generateClientId
 import domain.model.Message
 import domain.model.Theme
 import domain.repository.ClientRepository
@@ -19,10 +19,10 @@ import org.koin.core.component.inject
 class ClientRepositoryImpl : ClientRepository<HttpClient> {
     override val client: HttpClient by inject()
 
-    override fun getUserId(): Flow<String> = flow {
+    override fun getClientId(): Flow<String> = flow {
         var userId: String? = localStorage.getItem("userId")
         if (userId == null) {
-            userId = generateUserId()
+            userId = generateClientId()
             localStorage.setItem(
                 "userId",
                 userId

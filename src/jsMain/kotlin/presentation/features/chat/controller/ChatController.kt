@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import domain.model.Message
 import domain.use_case.GetMessagesUseCase
-import domain.use_case.GetUserIdUseCase
+import domain.use_case.GetClientIdUseCase
 import domain.use_case.PostMessageUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ class ChatController {
     val getMessagesUseCase = GetMessagesUseCase()
     val postMessageUseCase = PostMessageUseCase()
 
-    val getUserIdUseCase = GetUserIdUseCase()
+    val getClientIdUseCase = GetClientIdUseCase()
 
 
     private val _messageList: MutableState<List<Message>> = mutableStateOf(emptyList())

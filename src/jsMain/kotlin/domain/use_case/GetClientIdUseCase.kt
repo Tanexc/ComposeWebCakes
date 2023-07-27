@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class GetUserIdUseCase: KoinComponent {
+class GetClientIdUseCase: KoinComponent {
     private val clientRepository: ClientRepository<HttpClient> by inject()
 
-    operator fun invoke(): Flow<String> = clientRepository.getUserId()
+    operator fun invoke(): Flow<String> = clientRepository.getClientId()
 }

@@ -25,7 +25,7 @@ object HashTool {
         }
     }
 
-    suspend fun generateUserId(): String {
+    suspend fun generateClientId(): String {
         return getHashPart(
             listOf(
                 currentNanoTime().toString(),

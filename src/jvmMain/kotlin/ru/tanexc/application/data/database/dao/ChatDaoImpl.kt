@@ -37,12 +37,12 @@ class ChatDaoImpl : ChatDao {
             }
         }
 
-    override suspend fun getByUserId(userId: String): Chat? = ChatTable
+    override suspend fun getByClientId(clientId: String): Chat? = ChatTable
         .asDomain {
             dbQuery {
                 it
                     .select {
-                        ChatTable.userId eq userId
+                        ChatTable.clientId eq clientId
                     }
                     .firstOrNull()
             }

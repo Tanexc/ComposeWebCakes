@@ -7,7 +7,7 @@ interface ChatDao {
 
     suspend fun getById(id: Long): Chat?
 
-    suspend fun getByUserId(userId: String): Chat?
+    suspend fun getByClientId(clientId: String): Chat?
 
     suspend fun edit(chat: Chat)
 }

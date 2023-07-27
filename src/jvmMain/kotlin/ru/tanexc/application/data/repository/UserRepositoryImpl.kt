@@ -145,7 +145,7 @@ class UserRepositoryImpl : UserRepository, KoinComponent {
             userDao.edit(user.copy(chatIds = user.chatIds + id))
             emit(State.Success(user.copy(chatIds = user.chatIds + id)))
         } catch (e: Exception) {
-            emit(State.Error(message = e.message ?: "update chats problem"))
+            emit(State.Error(message = e.message ?: "update chatsr problem"))
         }
     }
 }

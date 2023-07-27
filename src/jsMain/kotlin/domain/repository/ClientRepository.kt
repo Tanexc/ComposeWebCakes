@@ -8,7 +8,7 @@ import org.koin.core.component.KoinComponent
 interface ClientRepository<T>: KoinComponent {
     val client: T
 
-    fun getUserId(): Flow<String>
+    fun getClientId(): Flow<String>
 
     fun getTheme(): Flow<Theme>
 

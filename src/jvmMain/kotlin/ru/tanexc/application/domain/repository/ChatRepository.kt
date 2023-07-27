@@ -7,7 +7,7 @@ import util.State
 
 interface ChatRepository {
 
-    fun getChatByUserId(userId: String): Flow<State<Chat?>>
+    fun getChatByClientId(clientId: String): Flow<State<Chat?>>
 
     fun createChat(userId: String): Flow<State<Chat>>
 

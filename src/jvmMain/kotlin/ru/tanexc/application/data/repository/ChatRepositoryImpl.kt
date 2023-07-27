@@ -17,26 +17,25 @@ class ChatRepositoryImpl: ChatRepository, KoinComponent {
     private val chatDao: ChatDao by inject()
     private val messageDao: MessageDao by inject()
 
-    override fun getChatByUserId(userId: String): Flow<State<Chat?>> = flow {
+    override fun getChatByClientId(clientId: String): Flow<State<Chat?>> = flow {
         try {
             emit(State.Processing())
-            val chat = chatDao.getByUserId(userId)?: throw DataIsNull()
+            val chat = chatDao.getByClientId(clientId)?: throw DataIsNull()
             emit(State.Success(chat))
         } catch (e: Exception) {
-            emit(State.Error(message = e.message?: "getting chat by userId = $userId problem"))
+            emit(State.Error(message = e.message?: "getting chat by userId = $clientId problem"))
         }
-
     }
 
-    override fun createChat(userId: String): Flow<State<Chat>> = flow {
+    override fun createChat(clientId: String): Flow<State<Chat>> = flow {
         try {
             emit(State.Processing())
 
             val chat: Chat = chatDao.insert(
                 Chat(
                     id = -1L,
-                    userId = userId,
-                    title = "#${userId.substring(0, 8)}",
+                    clientId = clientId,
+                    title = "#${clientId.substring(0, 8)}",
                     messages = emptyList(),
                     creationTimestamp = getTimeMillis(),
                     newMessagesCount = 0

@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import domain.use_case.GetUserIdUseCase
+import domain.use_case.GetClientIdUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -23,13 +23,13 @@ import presentation.style.ui.theme.getTheme
 @Composable
 fun InfoScreen() {
     val theme = getTheme(true)
-    val getUserIdUseCase = GetUserIdUseCase()
+    val getClientIdUseCase = GetClientIdUseCase()
 
     val userId = remember { mutableStateOf("") }
 
 
 
-    getUserIdUseCase().onEach {
+    getClientIdUseCase().onEach {
         userId.value = it
     }.launchIn(CoroutineScope(Dispatchers.Default))
 
