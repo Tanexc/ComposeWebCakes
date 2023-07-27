@@ -16,8 +16,8 @@ interface UserRepository {
 
     suspend fun updateToken(data: User): Flow<State<User>>
 
-    suspend fun updatePassword(data: User): Flow<State<User>>
+    suspend fun updatePassword(data: User, newPassword: String): Flow<State<User>>
 
-    suspend fun updateChatIds(id: Long): Flow<State<User>>
+    suspend fun updateChatIds(data: User, id: Long): Flow<State<User>>
 
 }
