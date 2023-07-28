@@ -9,7 +9,7 @@ interface ChatRepository {
 
     fun getChatByClientId(clientId: String): Flow<State<Chat?>>
 
-    fun createChat(clientId: String): Flow<State<Chat>>
+    fun createChat(clientId: String, title: String?): Flow<State<Chat>>
 
     fun insertMessage(chatData: Chat, data: Message): Flow<State<Chat>>
 }

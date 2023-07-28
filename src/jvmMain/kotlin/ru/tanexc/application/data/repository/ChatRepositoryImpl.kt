@@ -20,14 +20,14 @@ class ChatRepositoryImpl: ChatRepository, KoinComponent {
     override fun getChatByClientId(clientId: String): Flow<State<Chat?>> = flow {
         try {
             emit(State.Processing())
-            val chat = chatDao.getByClientId(clientId)?: throw DataIsNull()
+            val chat = chatDao.getByClientId(clientId)
             emit(State.Success(chat))
         } catch (e: Exception) {
             emit(State.Error(message = e.message?: "getting chat by userId = $clientId problem"))
         }
     }
 
-    override fun createChat(clientId: String): Flow<State<Chat>> = flow {
+    override fun createChat(clientId: String, title: String?): Flow<State<Chat>> = flow {
         try {
             emit(State.Processing())
 
@@ -35,7 +35,7 @@ class ChatRepositoryImpl: ChatRepository, KoinComponent {
                 Chat(
                     id = -1L,
                     clientId = clientId,
-                    title = "#${clientId.substring(0, 8)}",
+                    title = "${title?:""}#${clientId.substring(0, 8)}",
                     messages = emptyList(),
                     creationTimestamp = getTimeMillis(),
                     newMessagesCount = 0

@@ -14,7 +14,7 @@ object MessageTable : Table(), DatabaseEntity {
     val text = text("text")
     val replyTo = long("replyTo").nullable()
     val timestamp = long("timestamp")
-    val sender = long("sender")
+    val sender = text("sender")
 
     override suspend fun asDomain(getResult: suspend (Table) -> ResultRow?): Message? {
         val data = getResult(this)?: return null

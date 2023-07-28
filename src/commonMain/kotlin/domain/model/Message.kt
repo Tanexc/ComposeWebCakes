@@ -9,5 +9,5 @@ data class Message(
     val timestamp: Long,
 
     val text: String,
-    val sender: Long
+    val sender: String
 ): Domain
