@@ -1,11 +1,13 @@
 package ru.tanexc.application.presentation.server.configuration.routes
 
+import androidx.compose.ui.res.useResource
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.routing.*
-import ru.tanexc.application.presentation.api.chatApi.chatApiRoutes
+import ru.tanexc.application.presentation.features.api.chatApi.chatApi
+import ru.tanexc.application.presentation.features.api.messageApi.messageApi
 import ru.tanexc.application.presentation.ui.baseUiRoute
-import ru.tanexc.application.presentation.websocket.chatWebsocket.chatWebsocket
+import ru.tanexc.application.presentation.features.websocket.chatWebsocket.chatWebsocket
 
 fun Application.configureRoutes() = routing {
 
@@ -13,7 +15,8 @@ fun Application.configureRoutes() = routing {
     baseUiRoute()
 
     // API
-    chatApiRoutes()
+    chatApi()
+    messageApi()
 
     // WEBSOCKETS
     chatWebsocket()

@@ -1,4 +1,4 @@
-package ru.tanexc.application.presentation.websocket.controller
+package ru.tanexc.application.presentation.features.websocket.controller
 
 import domain.model.Chat
 import domain.model.Message
