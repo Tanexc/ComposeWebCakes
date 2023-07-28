@@ -5,7 +5,7 @@ import io.ktor.server.http.content.*
 import io.ktor.server.routing.*
 import ru.tanexc.application.presentation.api.chatApi.chatApiRoutes
 import ru.tanexc.application.presentation.ui.baseUiRoute
-import ru.tanexc.application.presentation.websocket.chatWebsocket.webSocketRoutes
+import ru.tanexc.application.presentation.websocket.chatWebsocket.chatWebsocket
 
 fun Application.configureRoutes() = routing {
 
@@ -15,9 +15,8 @@ fun Application.configureRoutes() = routing {
     // API
     chatApiRoutes()
 
-    // WEBSOCKET
-    webSocketRoutes()
-
+    // WEBSOCKETS
+    chatWebsocket()
 
     // STATIC FILES
     staticResources(
