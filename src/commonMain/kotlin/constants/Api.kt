@@ -4,7 +4,6 @@ object Api {
     // Message api
     const val GET_MESSAGES = "api/message/get/chat" // get messages from chat with client id
     const val GET_MESSAGE = "api/message/get" // get one message by id
-    const val POST_MESSAGE = "api/message/post" // post message
 
     // Chat api
     const val GET_CHAT = "api/chat/get" // get chat by client id if exist
