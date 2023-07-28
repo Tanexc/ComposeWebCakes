@@ -7,8 +7,8 @@ import org.koin.core.component.inject
 import ru.tanexc.application.domain.repository.ChatRepository
 import util.State
 
-class GetChatByClientIdUseCase: KoinComponent {
+class ChatCreateUseCase: KoinComponent {
     private val repository: ChatRepository by inject()
 
-    operator fun invoke(clientId: String): Flow<State<Chat?>> = repository.getChatByClientId(clientId)
+    operator fun invoke(clientId: String): Flow<State<Chat>> = repository.createChat(clientId)
 }

@@ -7,8 +7,8 @@ import org.koin.core.component.inject
 import ru.tanexc.application.domain.repository.MessageRepository
 import util.State
 
-class CreateMessageUseCase: KoinComponent {
+class MessageGetByListUseCase: KoinComponent {
     private val repository: MessageRepository by inject()
 
-    suspend operator fun invoke(message: Message): Flow<State<Message>> = repository.create(message)
+    suspend operator fun invoke(listId: List<Long>): Flow<State<List<Message>>> = repository.getByListId(listId)
 }
