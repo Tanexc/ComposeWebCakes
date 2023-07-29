@@ -27,6 +27,16 @@ class ChatRepositoryImpl: ChatRepository, KoinComponent {
         }
     }
 
+    override fun getChatById(id: Long): Flow<State<Chat?>> = flow {
+        try {
+            emit(State.Processing())
+            val chat = chatDao.getById(id)
+            emit(State.Success(chat))
+        } catch (e: Exception) {
+            emit(State.Error(message = e.message?: "getting chat with id = $id problem"))
+        }
+    }
+
     override fun createChat(clientId: String, title: String?): Flow<State<Chat>> = flow {
         try {
             emit(State.Processing())
