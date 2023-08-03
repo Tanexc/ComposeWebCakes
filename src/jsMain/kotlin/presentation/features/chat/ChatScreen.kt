@@ -52,26 +52,26 @@ fun ChatScreen() {
                                 .background(
                                     theme.secondaryContainer.copy(0.6f),
                                     when (messagesList.indexOf(messageItem)) {
-                                        0 -> if (userId == messageItem.sender) {
+                                        0 -> if (userId.toString() == messageItem.sender) {
                                             RoundedCornerShape(22.dp, 22.dp, 6.dp, 22.dp)
                                         } else {
                                             RoundedCornerShape(22.dp, 22.dp, 22.dp, 6.dp)
                                         }
 
-                                        (messagesList.lastIndex) -> if (userId == messageItem.sender) {
+                                        (messagesList.lastIndex) -> if (userId.toString() == messageItem.sender) {
                                             RoundedCornerShape(22.dp, 6.dp, 22.dp, 22.dp)
                                         } else {
                                             RoundedCornerShape(6.dp, 22.dp, 22.dp, 22.dp)
                                         }
 
-                                        else -> if (userId == messageItem.sender) {
+                                        else -> if (userId.toString() == messageItem.sender) {
                                             RoundedCornerShape(22.dp, 6.dp, 6.dp, 22.dp)
                                         } else {
                                             RoundedCornerShape(6.dp, 22.dp, 22.dp, 6.dp)
                                         }
                                     }
                                 ),
-                            align = if (userId == messageItem.sender) {
+                            align = if (userId.toString() == messageItem.sender) {
                                 Alignment.CenterEnd
                             } else {
                                 Alignment.CenterStart

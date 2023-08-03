@@ -6,7 +6,7 @@ import org.koin.core.context.startKoin
 import presentation.features.application.ClientMainApp
 import presentation.features.application.components.BrowserViewportWindow
 import presentation.style.strings.Strings
-import presentation.style.strings.Strings.EN.app_name
+import presentation.style.strings.Strings.EN.appName
 import presentation.style.ui.theme.ClientTheme
 
 
@@ -17,7 +17,7 @@ fun main() {
     }
 
     onWasmReady {
-        BrowserViewportWindow(Strings.EN(app_name)) {
+        BrowserViewportWindow(Strings.EN(appName)) {
             ClientTheme(true) {
                 ClientMainApp()
             }
