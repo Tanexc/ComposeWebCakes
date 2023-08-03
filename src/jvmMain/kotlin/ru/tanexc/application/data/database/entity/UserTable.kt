@@ -13,7 +13,7 @@ object UserTable : Table(), DatabaseEntity {
 
     val name = text("title")
     val surname = text("surname")
-    val login = text("surname").uniqueIndex()
+    val login = text("login").uniqueIndex()
 
     val chatIds = text("chatIds")
     val creationTimestamp = long("creationTimestamp")
@@ -30,7 +30,8 @@ object UserTable : Table(), DatabaseEntity {
             name = data[name],
             password = data[password],
             surname = data[surname],
-            token = data[token]
+            token = data[token],
+            login = data[login]
         )
     }
 }

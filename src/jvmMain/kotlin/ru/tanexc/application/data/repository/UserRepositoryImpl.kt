@@ -120,11 +120,11 @@ class UserRepositoryImpl : UserRepository, KoinComponent {
         }
     }
 
-    override suspend fun updatePassword(data: User, newPassword: String): Flow<State<User>> = flow {
+    override suspend fun updatePassword(token: String, newPassword: String): Flow<State<User>> = flow {
         try {
             emit(State.Processing())
 
-            val user: User = userDao.getByToken(data.token)?: throw InvalidData()
+            val user: User = userDao.getByToken(token)?: throw InvalidData()
             if (!newPassword.isValid()) throw InvalidData()
             val password = getHash(newPassword)
             userDao.edit(user.copy(password = password))
@@ -135,17 +135,17 @@ class UserRepositoryImpl : UserRepository, KoinComponent {
         }
     }
 
-    override suspend fun updateChatIds(data: User, id: Long): Flow<State<User>>  = flow {
+    override suspend fun updateChatIds(token: String, id: Long): Flow<State<User>>  = flow {
         try {
             emit(State.Processing())
 
-            if (!data.token.isNotExpired()) throw TokenExpired()
-            val user: User = userDao.getByToken(data.token)?: throw InvalidData()
+            if (token.isNotExpired()) throw TokenExpired()
+            val user: User = userDao.getByToken(token)?: throw InvalidData()
 
             userDao.edit(user.copy(chatIds = user.chatIds + id))
             emit(State.Success(user.copy(chatIds = user.chatIds + id)))
         } catch (e: Exception) {
-            emit(State.Error(message = e.message ?: "update chatsr problem"))
+            emit(State.Error(message = e.message ?: "update chats problem"))
         }
     }
 }
