@@ -11,7 +11,8 @@ object Api {
     const val POST_MESSAGE_INTO_CHAT = "api/chat/post/message" // post message into chat
 
     // User api
-    const val GET_USER = "api/user/get" // get chat by id or token
+    const val GET_USER = "api/user/get/id" // get chat by user id
+    const val GET_USER_BY_TOKEN = "api/user/get/token"  // get chat by token
     const val SIGN_IN_USER = "api/user/get/sign-in" // sign in user if exist
     const val SIGN_UP_USER = "api/user/get/sign-up" // sign up user
     const val UPDATE_CHATS_USER = "api/user/post/chat" // add chat id to user's chats
