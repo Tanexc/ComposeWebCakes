@@ -22,7 +22,7 @@ sealed class Screen(
     )
 
     object Info: Screen(
-        label = Strings.VALUES.info,
+        label = Strings.VALUES.aboutUs,
         iconOutlined = IconOutlinedAssessment,
         iconFilled = IconFilledAssessment
     )
