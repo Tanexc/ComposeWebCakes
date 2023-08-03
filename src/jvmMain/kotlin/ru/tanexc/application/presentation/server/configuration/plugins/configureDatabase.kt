@@ -4,5 +4,5 @@ import io.ktor.server.application.*
 import ru.tanexc.application.data.database.factory.DatabaseFactory
 
 fun Application.configureDatabase() {
-    DatabaseFactory.init(environment.config)
+    DatabaseFactory.init()
 }
