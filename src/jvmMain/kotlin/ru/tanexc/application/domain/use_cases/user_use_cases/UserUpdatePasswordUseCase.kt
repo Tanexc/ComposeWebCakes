@@ -10,5 +10,5 @@ import util.State
 class UserUpdatePasswordUseCase: KoinComponent {
     private val repository: UserRepository by inject()
 
-    suspend operator fun invoke(user: User, newPassword: String): Flow<State<User>> = repository.updatePassword(user, newPassword)
+    suspend operator fun invoke(token: String, newPassword: String): Flow<State<User>> = repository.updatePassword(token, newPassword)
 }

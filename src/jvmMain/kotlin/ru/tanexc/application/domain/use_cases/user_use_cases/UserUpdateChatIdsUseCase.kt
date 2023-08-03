@@ -7,8 +7,8 @@ import org.koin.core.component.inject
 import ru.tanexc.application.domain.repository.UserRepository
 import util.State
 
-class UserUpdateChatIds: KoinComponent {
+class UserUpdateChatIdsUseCase: KoinComponent {
     private val repository: UserRepository by inject()
 
-    suspend operator fun invoke(user: User, id: Long): Flow<State<User>> = repository.updateChatIds(user, id)
+    suspend operator fun invoke(token: String, id: Long): Flow<State<User>> = repository.updateChatIds(token, id)
 }
