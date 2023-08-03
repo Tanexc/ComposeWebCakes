@@ -10,8 +10,8 @@ val exposedVersion: String by project
 val postgresqlVersion: String by project
 
 plugins {
-    kotlin("multiplatform") version "1.8.0"
-    id("org.jetbrains.compose") version "1.4.0"
+    kotlin("multiplatform") version "1.9.0"
+    id("org.jetbrains.compose") version "1.5.0-beta01"
     application
 }
 
@@ -147,7 +147,7 @@ tasks.named<Copy>("jvmProcessResources") {
 tasks.named<JavaExec>("run") {
     dependsOn(tasks.named<Jar>("jvmJar"))
     classpath(tasks.named<Jar>("jvmJar"))
-    classpath("androidx.compose.runtime:runtime:1.4.0")
+    classpath("androidx.compose.runtime:runtime:1.5.0-beta01")
 }
 
 compose.experimental {
