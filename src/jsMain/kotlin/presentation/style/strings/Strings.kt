@@ -31,6 +31,7 @@ sealed class Strings {
 
         override fun invoke(): Int = 1
     }
+    object VALUES: Strings()
 }
 
 fun getResources(locale: Int): StringResources {
