@@ -89,10 +89,14 @@ kotlin {
 
                 // Ktor
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
 
                 // Skiko
                 implementation("org.jetbrains.skiko:skiko-js:$skikoVersion")
                 implementation("org.jetbrains.skiko:skiko-js-runtime:$skikoRuntimeVersion")
+
+                // Serialization
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
                 dependsOn(commonMain)
             }
