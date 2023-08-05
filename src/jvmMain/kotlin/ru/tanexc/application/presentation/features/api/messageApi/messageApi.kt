@@ -2,15 +2,14 @@ package ru.tanexc.application.presentation.features.api.messageApi
 
 import constants.Api.GET_MESSAGE
 import constants.Api.GET_MESSAGES
-import domain.model.Domain
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
+import ru.tanexc.application.core.util.RespondData
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatGetByClientIdUseCase
 import ru.tanexc.application.domain.use_cases.message_use_cases.MessageGetByIdUseCase
 import ru.tanexc.application.domain.use_cases.message_use_cases.MessageGetByListUseCase
-import ru.tanexc.application.core.util.RespondData
 import util.State
 import util.exceptions.DataIsNull
 import util.exceptions.InvalidData

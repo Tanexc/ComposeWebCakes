@@ -2,7 +2,6 @@ package ru.tanexc.application.data.repository
 
 import domain.model.Chat
 import domain.model.Message
-import ru.tanexc.application.domain.repository.ChatRepository
 import io.ktor.util.date.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -10,6 +9,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.tanexc.application.domain.interfaces.ChatDao
 import ru.tanexc.application.domain.interfaces.MessageDao
+import ru.tanexc.application.domain.repository.ChatRepository
 import util.State
 import util.exceptions.DataIsNull
 

@@ -1,12 +1,10 @@
 package presentation.client
 
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.CanvasBasedWindow
 import core.di.clientModule
 import org.jetbrains.skiko.wasm.onWasmReady
 import org.koin.core.context.startKoin
 import presentation.features.application.ClientMainApp
-import presentation.features.application.components.BrowserViewportWindow
 import presentation.features.application.components.CanvasSizeWindow
 import presentation.style.strings.Strings
 import presentation.style.strings.Strings.EN.appName

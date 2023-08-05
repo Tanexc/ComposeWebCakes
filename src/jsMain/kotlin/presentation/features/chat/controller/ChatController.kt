@@ -4,8 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import domain.model.Message
-import domain.use_case.GetMessagesUseCase
 import domain.use_case.GetClientIdUseCase
+import domain.use_case.GetMessagesUseCase
 import domain.use_case.PostMessageUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

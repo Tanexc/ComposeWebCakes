@@ -2,7 +2,6 @@ package ru.tanexc.application.presentation.server
 
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import org.koin.core.component.inject
 import ru.tanexc.application.core.util.config.ConfigTool
 import ru.tanexc.application.presentation.server.configuration.plugins.*
 import ru.tanexc.application.presentation.server.configuration.routes.configureRoutes

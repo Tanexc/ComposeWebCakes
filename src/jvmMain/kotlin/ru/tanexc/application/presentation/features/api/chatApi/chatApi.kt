@@ -10,15 +10,14 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
+import ru.tanexc.application.core.util.RespondData
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatCreateUseCase
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatGetByClientIdUseCase
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatGetByIdUseCase
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatInsertMessageUseCase
-import ru.tanexc.application.core.util.RespondData
 import util.State
 import util.exceptions.DataIsNull
 import util.exceptions.InvalidData
-import java.util.logging.Logger
 
 fun Routing.chatApi() {
     val chatCreateUseCase: ChatCreateUseCase by inject()
