@@ -130,9 +130,18 @@ class UserRepositoryImpl : UserRepository, KoinComponent {
             val user: User = userDao.getByToken(token)?: throw InvalidData()
             if (!newPassword.isValid()) throw InvalidData()
             val password = getHash(newPassword)
-            userDao.edit(user.copy(password = password))
 
-            emit(State.Success(user.copy(password = password)))
+            val newToken = generateToken(
+                name = user.name,
+                surname = user.surname,
+                login = user.login,
+                oldToken = user.token,
+                creationTimestamp = getTimeMillis()
+            )
+
+            userDao.edit(user.copy(password = password, token = newToken))
+
+            emit(State.Success(user.copy(password = password, token = newToken)))
         } catch (e: Exception) {
             emit(State.Error(message = e.message ?: "update password problem"))
         }
