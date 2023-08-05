@@ -14,6 +14,7 @@ class UserDaoImpl : UserDao {
             dbQuery {
                 (table as UserTable)
                     .insert { row ->
+                        row[login] = user.login
                         row[name] = user.name
                         row[surname] = user.surname
                         row[chatIds] = user.chatIds.joinToString(" ")
