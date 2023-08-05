@@ -5,6 +5,7 @@ import constants.Api.GET_NEW_CHAT
 import constants.Api.POST_MESSAGE_INTO_CHAT
 import domain.model.Domain
 import domain.model.Message
+import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -78,10 +79,20 @@ fun Routing.chatApi() {
 
     post(POST_MESSAGE_INTO_CHAT) {
         try {
-            val chatId: Long = call.request.queryParameters["chatId"]?.toLong() ?: throw InvalidData()
+            var chatId: Long? = null
+
+            val multipart = call.receiveMultipart().readAllParts()
+            multipart.filterIsInstance<PartData.FormItem>().forEach {
+                when (it.name) {
+                    "chatId" -> chatId = it.value.toLong()
+                }
+            }
+
+            if (chatId == null) throw InvalidData()
+
             val message: Message = call.receive()
 
-            chatGetByIdUseCase(chatId).collect {
+            chatGetByIdUseCase(chatId!!).collect {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { chat ->
@@ -98,7 +109,7 @@ fun Routing.chatApi() {
                                     else -> {}
                                 }
                             }
-                        }?: throw DataIsNull()
+                        } ?: throw DataIsNull()
                     }
 
                     is State.Error -> {
