@@ -24,19 +24,6 @@ class ChatRepositoryImpl: ChatRepository {
         }
     }
 
-    override fun getChatById(id: Long): Flow<State<Chat>> = flow {
-        emit(State.Processing())
-        val respond = chatApi.getChatById(id)
-        when(val chat = respond.data) {
-            is Chat -> {
-                emit(State.Success(chat))
-            }
-            else -> {
-                emit(State.Error(message = respond.message?: "get chat by id error"))
-            }
-        }
-    }
-
     override fun createChat(clientId: String, title: String): Flow<State<Chat>> = flow {
         emit(State.Processing())
         val respond = chatApi.createChat(clientId, title)
