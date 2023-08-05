@@ -25,7 +25,7 @@ object UserTable : Table(), DatabaseEntity {
 
         return User(
             id = data[id],
-            chatIds = data[chatIds].split(" ").map { it.toLong() },
+            chatIds = data[chatIds].split(" ").mapNotNull { it.toLongOrNull() },
             creationTimestamp = data[creationTimestamp],
             name = data[name],
             password = data[password],
