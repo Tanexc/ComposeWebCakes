@@ -1,5 +1,8 @@
 package domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class User(
     val id: Long = -1,
     val login: String,
@@ -9,7 +12,7 @@ data class User(
     val creationTimestamp: Long = 0,
     val password: ByteArray = ByteArray(0),
     val token: String = ""
-): Domain {
+): Domain() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false

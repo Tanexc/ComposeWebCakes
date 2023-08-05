@@ -1,3 +1,6 @@
 package domain.model
 
-interface Domain
+import kotlinx.serialization.Serializable
+
+@Serializable
+sealed class Domain
