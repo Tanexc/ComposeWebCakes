@@ -5,6 +5,8 @@ import constants.Api.GET_MESSAGE
 import constants.Api.GET_MESSAGES
 import constants.Application.HOST
 import core.util.HashTool.generateClientId
+import domain.interfaces.ChatApi
+import domain.interfaces.UserApi
 import domain.model.Message
 import domain.model.Theme
 import domain.repository.ClientRepository
@@ -16,8 +18,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.component.inject
 
-class ClientRepositoryImpl : ClientRepository<HttpClient> {
-    override val client: HttpClient by inject()
+class ClientRepositoryImpl : ClientRepository {
+    private val userApi: UserApi by inject()
+    private val chatApi: ChatApi by inject()
 
     override fun getClientId(): Flow<String> = flow {
         var userId: String? = localStorage.getItem("userId")
@@ -58,28 +61,6 @@ class ClientRepositoryImpl : ClientRepository<HttpClient> {
         localStorage.setItem("themeId", "${theme.id}")
     }
 
-    override fun getMessages(): Flow<List<Message>> = flow {
-        val response = client.get("$HOST$GET_MESSAGES")
-
-        val messages: List<Message> = response.body()
-        emit(messages)
-    }
-
-    override fun getMessage(id: Long): Flow<Message> = flow {
-        val response = client.get("$HOST$GET_MESSAGE") {
-            url {
-                parameters.append("id", "$id")
-            }
-        }
-
-        val message: Message = response.body()
-        emit(message)
-    }
-
-    override fun postMessage(message: Message) {
-        TODO("Not yet implemented")
-    }
-
     override fun getLocale(): Int {
         var locale = localStorage.getItem("locale")?.toInt()
         if (locale == null) {
@@ -92,6 +73,4 @@ class ClientRepositoryImpl : ClientRepository<HttpClient> {
     override fun setLocale(localeId: Int) {
         localStorage.setItem("locale", "$localeId")
     }
-
-
 }
