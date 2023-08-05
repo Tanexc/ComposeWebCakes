@@ -1,4 +1,4 @@
-package ru.tanexc.application.core.util
+package domain.model
 
 import kotlinx.serialization.Serializable
 
