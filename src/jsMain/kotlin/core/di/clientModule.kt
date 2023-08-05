@@ -6,6 +6,7 @@ import data.repository.ClientRepositoryImpl
 import domain.interfaces.ChatApi
 import domain.interfaces.UserApi
 import domain.repository.ClientRepository
+import domain.repository.UserRepository
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.websocket.*
