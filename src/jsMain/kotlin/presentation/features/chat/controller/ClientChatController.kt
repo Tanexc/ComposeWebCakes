@@ -6,10 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import domain.controller.SettingsController
 import domain.model.Message
-import domain.use_case.GetClientIdUseCase
-import domain.use_case.GetClientNameUseCase
-import domain.use_case.GetMessagesUseCase
-import domain.use_case.PostMessageUseCase
+import domain.use_case.client.GetClientIdUseCase
+import domain.use_case.client.GetClientNameUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn

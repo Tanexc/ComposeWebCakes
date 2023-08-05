@@ -19,9 +19,6 @@ import kotlinx.coroutines.flow.flow
 import org.koin.core.component.inject
 
 class ClientRepositoryImpl : ClientRepository {
-    private val userApi: UserApi by inject()
-    private val chatApi: ChatApi by inject()
-
     override fun getClientId(): Flow<String> = flow {
         var userId: String? = localStorage.getItem("userId")
         if (userId == null) {
