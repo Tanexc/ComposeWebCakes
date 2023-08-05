@@ -12,6 +12,7 @@ val postgresqlVersion: String by project
 plugins {
     kotlin("multiplatform") version "1.9.0"
     id("org.jetbrains.compose") version "1.5.0-beta01"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
     application
 }
 
@@ -73,7 +74,7 @@ kotlin {
                 implementation(compose.material3)
 
                 // Serialization
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
                 // Bcrypt
                 implementation("de.nycode:bcrypt:2.3.0")
@@ -111,6 +112,10 @@ kotlin {
                 implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
                 implementation("io.ktor:ktor-server-auth-jwt-jvm:$ktorVersion")
 
+                // Serialization
+                implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
+
+
                 // Exposed
                 implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
                 implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
@@ -127,6 +132,9 @@ kotlin {
 
                 // Koin
                 implementation("io.insert-koin:koin-ktor:$koinVersion")
+
+                // SLF4J Logger
+                implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
                 dependsOn(commonMain)
             }
