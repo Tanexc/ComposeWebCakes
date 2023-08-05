@@ -8,7 +8,9 @@ import constants.Api.UPDATE_CHATS_USER
 import constants.Api.UPDATE_PASSWORD
 import domain.model.Domain
 import domain.model.User
+import io.ktor.http.content.*
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
@@ -24,6 +26,7 @@ fun Routing.userApi() {
     val userSignInUseCase: UserSignInUseCase by inject()
     val userSignUpUseCase: UserSignUpUseCase by inject()
     val userUpdateChatIdsUseCase: UserUpdateChatIdsUseCase by inject()
+    val userUpdatePasswordUseCase: UserUpdatePasswordUseCase by inject()
 
     get(GET_USER) {
         try {
@@ -94,20 +97,30 @@ fun Routing.userApi() {
         }
     }
 
-    get(SIGN_UP_USER) {
+    post(SIGN_UP_USER) {
         try {
-            val login: String = call.request.queryParameters["login"] ?: throw InvalidData()
-            val name: String = call.request.queryParameters["name"] ?: throw InvalidData()
-            val surname: String = call.request.queryParameters["surname"] ?: throw InvalidData()
-            val password: String = call.request.queryParameters["password"] ?: throw InvalidData()
+            var login: String? = null
+            var name: String? = null
+            var surname: String? = null
+            var password: String? = null
+
+            val multipart = call.receiveMultipart().readAllParts()
+            multipart.filterIsInstance<PartData.FormItem>().forEach {
+                when (it.name) {
+                    "login" -> login = it.value
+                    "name" -> name = it.value
+                    "surname" -> surname = it.value
+                    "password" -> password = it.value
+                }
+            }
 
             userSignUpUseCase(
                 User(
-                login = login,
-                name = name,
-                surname = surname
+                login = login!!,
+                name = name!!,
+                surname = surname!!
                 ),
-                password
+                password!!
             ).collect {
                 when (it) {
                     is State.Success -> {
@@ -128,11 +141,19 @@ fun Routing.userApi() {
 
     post(UPDATE_CHATS_USER) {
         try {
-            val chatId: Long = call.request.queryParameters["chatId"]?.toLong() ?: throw InvalidData()
-            val token: String = call.request.queryParameters["token"]?: throw InvalidData()
+            var chatId: Long? = null
+            var token: String? = null
+
+            val multipart = call.receiveMultipart().readAllParts()
+            multipart.filterIsInstance<PartData.FormItem>().forEach {
+                when (it.name) {
+                    "chatId" -> chatId = it.value.toLongOrNull()
+                    "token" -> token = it.value
+                }
+            }
 
 
-            userUpdateChatIdsUseCase(token, chatId).collect {
+            userUpdateChatIdsUseCase(token!!, chatId!!).collect {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
@@ -152,11 +173,19 @@ fun Routing.userApi() {
 
     post(UPDATE_PASSWORD) {
         try {
-            val chatId: Long = call.request.queryParameters["newPassword"]?.toLong() ?: throw InvalidData()
-            val token: String = call.request.queryParameters["token"]?: throw InvalidData()
+            var password: String? = null
+            var token: String? = null
+
+            val multipart = call.receiveMultipart().readAllParts()
+            multipart.filterIsInstance<PartData.FormItem>().forEach {
+                when (it.name) {
+                    "token" -> token = it.value
+                    "newPassword" -> password = it.value
+                }
+            }
 
 
-            userUpdateChatIdsUseCase(token, chatId).collect {
+            userUpdatePasswordUseCase(token!!, password!!).collect {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
