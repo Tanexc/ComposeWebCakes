@@ -14,7 +14,7 @@ fun Routing.chatWebsocket() {
 
     webSocket(CHAT_WEBSOCKET) {
         try {
-            connectionController.connection(this, call.parameters)
+            throw connectionController.connection(this, call.parameters)
         } catch (e: Disconnected) {
             this.close(
                 reason = CloseReason(
