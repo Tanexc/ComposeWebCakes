@@ -19,7 +19,7 @@ import io.ktor.util.*
 import org.koin.core.component.inject
 
 class UserApiImpl : UserApi {
-    val client: HttpClient by inject()
+    private val client: HttpClient by inject()
 
     @OptIn(InternalAPI::class)
     override suspend fun signUp(data: User, password: String): RespondData<User> =
