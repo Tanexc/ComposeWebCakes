@@ -25,7 +25,7 @@ object ChatTable: Table(), DatabaseEntity {
         return Chat(
             id = data[id],
             clientId = data[clientId],
-            messages = data[messages].split(" ").map { it.toLong() },
+            messages = data[messages].split(" ").mapNotNull { it.toLongOrNull() },
             creationTimestamp = data[creationTimestamp],
             newMessagesCount = data[newMessagesCount],
             title = data[title]

@@ -15,6 +15,7 @@ class ChatDaoImpl : ChatDao {
                 it
                     .insert { row ->
 
+                        row[ChatTable.clientId] = chat.clientId
                         row[ChatTable.title] = chat.title
                         row[ChatTable.creationTimestamp] = chat.creationTimestamp
                         row[ChatTable.newMessagesCount] = 0
