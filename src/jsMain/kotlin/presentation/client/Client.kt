@@ -2,6 +2,8 @@ package presentation.client
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import core.di.clientModule
+import core.di.controllerModule
+import core.di.useCaseModule
 import org.jetbrains.skiko.wasm.onWasmReady
 import org.koin.core.context.startKoin
 import presentation.features.application.ClientMainApp
@@ -11,11 +13,14 @@ import presentation.style.strings.Strings.EN.appName
 import presentation.style.ui.theme.ClientTheme
 
 
-@OptIn(ExperimentalComposeUiApi::class)
 fun main() {
 
     startKoin {
-        modules(clientModule)
+        modules(listOf(
+            clientModule,
+            controllerModule,
+            useCaseModule
+        ))
     }
 
     onWasmReady {

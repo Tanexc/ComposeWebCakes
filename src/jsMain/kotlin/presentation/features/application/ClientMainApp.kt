@@ -13,11 +13,11 @@ import androidx.compose.ui.unit.dp
 import core.util.Screen
 import domain.controller.SettingsController
 import presentation.features.application.controller.SettingsControllerImpl
-import presentation.features.chat.ChatScreen
+import presentation.features.chat.chatScreen.ChatScreen
 import presentation.features.info.InfoScreen
 import presentation.style.ui.theme.Typography
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun ClientMainApp() {
     val settingsController: SettingsController = SettingsControllerImpl()
