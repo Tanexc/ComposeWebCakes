@@ -48,9 +48,7 @@ class ChatConnectionController(
             data[chat.id] = (data[chat.id] ?: emptyList()) + session
 
             while (true) {
-                println("sdsdfsdf")
                 val data: Message = session.receiveDeserialized()
-                println("docker")
                 try {
                     val message: Message = messageDao.insert(data) ?: disconnect(session, chat.id, InvalidData())
                     chat = chat.copy(messages = chat.messages + message.id)
