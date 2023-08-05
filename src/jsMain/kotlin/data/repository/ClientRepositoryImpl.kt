@@ -1,9 +1,9 @@
-package data
+package data.repository
 
 
 import constants.Api.GET_MESSAGE
 import constants.Api.GET_MESSAGES
-import constants.Deployment.HOST
+import constants.Application.HOST
 import core.util.HashTool.generateClientId
 import domain.model.Message
 import domain.model.Theme
@@ -29,6 +29,12 @@ class ClientRepositoryImpl : ClientRepository<HttpClient> {
             )
         }
         emit(userId)
+    }
+
+    override fun getClientName(): String? = localStorage.getItem("name")
+
+    override fun setClientName(data: String) {
+        localStorage.setItem("name", "data")
     }
 
     override fun getTheme(): Flow<Theme> = flow {

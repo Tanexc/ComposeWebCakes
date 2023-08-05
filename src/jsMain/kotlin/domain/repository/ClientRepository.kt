@@ -10,6 +10,10 @@ interface ClientRepository<T>: KoinComponent {
 
     fun getClientId(): Flow<String>
 
+    fun getClientName(): String?
+
+    fun setClientName(data: String)
+
     fun getTheme(): Flow<Theme>
 
     fun setTheme(theme: Theme)
