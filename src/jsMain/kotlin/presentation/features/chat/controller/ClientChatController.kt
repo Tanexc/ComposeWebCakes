@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class ChatController: KoinComponent {
+class ClientChatController: KoinComponent {
     val getMessagesUseCase: GetMessagesUseCase by inject()
     val postMessageUseCase: PostMessageUseCase by inject()
     val getClientNameUseCase: GetClientNameUseCase by inject()
@@ -67,4 +67,5 @@ class ChatController: KoinComponent {
     fun updateTextFieldValue(value: String) {
         _textFieldValue.value = value
     }
+
 }
