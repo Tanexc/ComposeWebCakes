@@ -49,13 +49,15 @@ class ChatConnectionController(
 
             while (true) {
                 val data: Message = session.receiveDeserialized()
-                try {
-                    val message: Message = messageDao.insert(data) ?: disconnect(session, chat.id, InvalidData())
-                    chat = chat.copy(messages = chat.messages + message.id)
-                    chatDao.edit(chat)
-                    sendMessage(chat.id, message)
-                } catch (e: Exception) {
-                    disconnect(session, chat.id, e)
+                if (data.text != "") {
+                    try {
+                        val message: Message = messageDao.insert(data) ?: disconnect(session, chat.id, InvalidData())
+                        chat = chat.copy(messages = chat.messages + message.id)
+                        chatDao.edit(chat)
+                        sendMessage(chat.id, message)
+                    } catch (e: Exception) {
+                        disconnect(session, chat.id, e)
+                    }
                 }
             }
         } catch (e: Exception) {
@@ -84,5 +86,6 @@ class ChatConnectionController(
         println("dissconnect")
         throw exception?: Disconnected()
     }
+
 
 }

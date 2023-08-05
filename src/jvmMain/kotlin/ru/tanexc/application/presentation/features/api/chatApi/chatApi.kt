@@ -5,13 +5,13 @@ import constants.Api.GET_NEW_CHAT
 import constants.Api.POST_MESSAGE_INTO_CHAT
 import domain.model.Domain
 import domain.model.Message
+import domain.model.RespondData
 import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
-import ru.tanexc.application.core.util.RespondData
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatCreateUseCase
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatGetByClientIdUseCase
 import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatGetByIdUseCase
