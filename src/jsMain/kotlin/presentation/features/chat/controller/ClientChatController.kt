@@ -16,8 +16,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class ClientChatController: KoinComponent {
-    val getMessagesUseCase: GetMessagesUseCase by inject()
-    val postMessageUseCase: PostMessageUseCase by inject()
     val getClientNameUseCase: GetClientNameUseCase by inject()
     val getClientIdUseCase: GetClientIdUseCase by inject()
     val settings: SettingsController by inject()
@@ -45,10 +43,6 @@ class ClientChatController: KoinComponent {
 
     init {
         if (clientName == null) _showInsertNameDialog.value = true
-
-        getMessagesUseCase().onEach {
-            _messageList.value = it
-        }.launchIn(CoroutineScope(Dispatchers.Default))
     }
 
     fun setClientName(name: String) {
