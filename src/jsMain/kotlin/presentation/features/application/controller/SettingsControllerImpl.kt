@@ -16,7 +16,7 @@ import presentation.style.strings.getResources
 import presentation.style.ui.theme.getTheme
 
 class SettingsControllerImpl: SettingsController {
-    private val clientRepository: ClientRepository<HttpClient> by inject()
+    private val clientRepository: ClientRepository by inject()
 
     private val _theme: MutableState<ColorScheme> = mutableStateOf(getTheme(true))
     override val theme by _theme

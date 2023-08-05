@@ -1,4 +1,4 @@
-package domain.use_case
+package domain.use_case.client
 
 import domain.repository.ClientRepository
 import io.ktor.client.*
@@ -7,7 +7,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class GetClientNameUseCase: KoinComponent {
-    private val clientRepository: ClientRepository<HttpClient> by inject()
+    private val clientRepository: ClientRepository by inject()
 
     operator fun invoke(): String? = clientRepository.getClientName()
 }
