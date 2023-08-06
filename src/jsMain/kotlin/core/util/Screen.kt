@@ -1,5 +1,8 @@
 package core.util
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import presentation.style.icons.filled.IconFilledAssessment
 import presentation.style.icons.filled.IconFilledChat
@@ -15,22 +18,28 @@ sealed class Screen(
     val iconFilled: ImageVector
 ) {
 
-    object Chat: Screen(
-        label = Strings.VALUES.chat,
+    data object Chat: Screen(
+        label = Strings.chat,
         iconOutlined = IconOutlinedChat,
         iconFilled = IconFilledChat
     )
 
-    object Info: Screen(
-        label = Strings.VALUES.aboutUs,
+    data object Info: Screen(
+        label = Strings.aboutUs,
         iconOutlined = IconOutlinedAssessment,
         iconFilled = IconFilledAssessment
     )
 
-    object FeedBack: Screen(
-        label = Strings.VALUES.feedback,
+    data object FeedBack: Screen(
+        label = Strings.feedback,
         iconOutlined = IconOutlinedThumbUp,
         iconFilled = IconFilledThumbUp
+    )
+
+    data object Settings: Screen(
+        label = Strings.settings,
+        iconOutlined = Icons.Outlined.Settings,
+        iconFilled = Icons.Filled.Settings
     )
 
 
