@@ -17,7 +17,7 @@ object HashTool {
     }
 
     private suspend fun getHashPart(values: List<String>, length: Int = Int.MAX_VALUE): String {
-        val hash = getHashByteArray(values.toString()).joinToString("") { it.toString(16).padStart(2, '0') }
+        val hash = getHashByteArray(values.toString()).joinToString("") { (0xFF and it.toInt()).toString(16).padStart(2, '0') }
         return if (length > hash.length) {
             hash
         } else {
