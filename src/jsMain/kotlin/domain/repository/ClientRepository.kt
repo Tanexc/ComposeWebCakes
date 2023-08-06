@@ -13,7 +13,7 @@ interface ClientRepository: KoinComponent {
 
     fun setClientName(data: String)
 
-    fun getTheme(): Flow<Theme>
+    fun getTheme(): Theme
 
     fun setTheme(value: Theme)
 

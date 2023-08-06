@@ -38,8 +38,8 @@ class ClientRepositoryImpl : ClientRepository {
         localStorage.setItem("name", data)
     }
 
-    override fun getTheme(): Flow<Theme> = flow {
-        var themeId = localStorage.getItem("themeId")?.toLong()
+    override fun getTheme(): Theme {
+        var themeId = localStorage.getItem("themeId")?.toLongOrNull()
         var useDarkTheme = localStorage.getItem("useDarkTheme")?.toBoolean()
         if (useDarkTheme == null) {
             useDarkTheme = true
@@ -51,7 +51,7 @@ class ClientRepositoryImpl : ClientRepository {
             localStorage.setItem("themeId", "$themeId")
         }
 
-        emit(Theme(themeId, useDarkTheme))
+        return Theme(themeId, useDarkTheme)
     }
 
     override fun setTheme(value: Theme) {

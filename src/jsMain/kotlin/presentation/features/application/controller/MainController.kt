@@ -12,6 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import presentation.style.ui.theme._applicationColorScheme
+import presentation.style.ui.theme._applicationUseDarkTheme
+import presentation.style.ui.theme.applicationColorScheme
+import presentation.style.ui.theme.getTheme
 import util.State
 
 class MainController: KoinComponent {
@@ -35,6 +39,10 @@ class MainController: KoinComponent {
     )
 
     init {
+
+        _applicationColorScheme.value = getTheme(clientRepository.getTheme().useDarkTheme)
+        _applicationUseDarkTheme.value = clientRepository.getTheme().useDarkTheme
+
         CoroutineScope(Dispatchers.Default).launch {
             clientRepository.getClientId().collect {
                 _clientId.value = it
