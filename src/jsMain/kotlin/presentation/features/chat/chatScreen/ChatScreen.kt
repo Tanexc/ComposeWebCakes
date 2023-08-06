@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -17,10 +18,13 @@ import androidx.compose.ui.unit.dp
 import presentation.features.chat.components.MessageBubble
 import presentation.features.chat.controller.ClientChatController
 import presentation.style.icons.filled.IconFilledSend
+import presentation.style.ui.theme.applicationColorScheme
+import presentation.style.ui.theme.applicationUseDarkTheme
 
 @Composable
 fun ChatScreen() {
     val controller = ClientChatController()
+    val lazyColumnState = rememberLazyListState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.align(Alignment.Center)) {
@@ -31,7 +35,7 @@ fun ChatScreen() {
                     .height(720.dp)
                     .padding(6.dp)
                     .background(
-                        controller.settings.theme.secondaryContainer.copy(0.3f),
+                        applicationColorScheme.secondaryContainer.copy(0.3f),
                         RoundedCornerShape(4.dp)
                     )
             ) {
@@ -43,7 +47,7 @@ fun ChatScreen() {
                                 message = messageItem,
                                 modifier = Modifier
                                     .background(
-                                        controller.settings.theme.secondaryContainer.copy(0.6f),
+                                        applicationColorScheme.secondaryContainer.copy(0.6f),
                                         when (controller.messageList.indexOf(messageItem)) {
                                             0 -> if (controller.clientId.toString() == messageItem.sender) {
                                                 RoundedCornerShape(22.dp, 22.dp, 6.dp, 22.dp)
@@ -77,7 +81,7 @@ fun ChatScreen() {
                             .align(Alignment.CenterEnd)
                             .fillMaxHeight(),
                         adapter = rememberScrollbarAdapter(
-                            scrollState = controller.lazyColumnState
+                            scrollState = lazyColumnState
                         )
                     )
                 }
