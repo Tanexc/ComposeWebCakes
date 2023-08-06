@@ -35,7 +35,7 @@ class ClientRepositoryImpl : ClientRepository {
     override fun getClientName(): String? = localStorage.getItem("name")
 
     override fun setClientName(data: String) {
-        localStorage.setItem("name", "data")
+        localStorage.setItem("name", data)
     }
 
     override fun getTheme(): Flow<Theme> = flow {
