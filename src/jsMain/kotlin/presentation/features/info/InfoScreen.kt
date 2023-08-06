@@ -12,26 +12,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import domain.use_case.client.GetClientIdUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import presentation.features.info.components.InfoCard
+import presentation.style.ui.theme.applicationColorScheme
+import presentation.style.ui.theme.applicationUseDarkTheme
 import presentation.style.ui.theme.getTheme
 
 @Composable
 fun InfoScreen() {
-    val theme = getTheme(true)
-    val getClientIdUseCase = GetClientIdUseCase()
-
     val userId = remember { mutableStateOf("") }
-
-
-
-    getClientIdUseCase().onEach {
-        userId.value = it
-    }.launchIn(CoroutineScope(Dispatchers.Default))
 
 
     val state = rememberLazyListState()
@@ -58,7 +46,7 @@ fun InfoScreen() {
                                     .fillMaxWidth(0.5f)
                                     .height(324.dp),
                                 borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
+                                backgroundColor = applicationColorScheme.secondaryContainer.copy(if (applicationUseDarkTheme) 0.3f else 0.7f)
                             ) {
                                 Box(modifier = Modifier
                                     .fillMaxSize()
@@ -81,7 +69,7 @@ fun InfoScreen() {
                                     .fillMaxWidth()
                                     .height(324.dp),
                                 borderRadius = 16.dp,
-                                backgroundColor = theme.secondaryContainer.copy(0.3f)
+                                backgroundColor = applicationColorScheme.secondaryContainer.copy(if (applicationUseDarkTheme) 0.3f else 0.7f)
                             ) {
                                 Box(modifier = Modifier
                                     .fillMaxSize()
