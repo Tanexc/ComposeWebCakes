@@ -34,14 +34,4 @@ sealed class State<T>(
             data = data,
             message = message
         )
-
-    class Expired<T>(
-        data: T? = null,
-        message: String = "expired"
-    ) :
-        State<T>(
-            data = data,
-            message = message
-        )
-
 }

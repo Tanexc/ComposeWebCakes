@@ -6,6 +6,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import com.example.compose.*
 
 
@@ -76,19 +79,19 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun ClientTheme(
-  useDarkTheme: Boolean = isSystemInDarkTheme(),
-  content: @Composable () -> Unit
+    useDarkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
 ) {
-  val colors = if (!useDarkTheme) {
-    LightColors
-  } else {
-    DarkColors
-  }
+    _applicationColorScheme.value = if (!useDarkTheme) {
+        LightColors
+    } else {
+        DarkColors
+    }
 
-  MaterialTheme(
-    colorScheme = colors,
-    content = content
-  )
+    MaterialTheme(
+        colorScheme = applicationColorScheme,
+        content = content
+    )
 }
 
 fun getTheme(useDarkTheme: Boolean): ColorScheme {
@@ -97,3 +100,10 @@ fun getTheme(useDarkTheme: Boolean): ColorScheme {
         else -> LightColors
     }
 }
+
+val _applicationUseDarkTheme: MutableState<Boolean> = mutableStateOf(true)
+val applicationUseDarkTheme: Boolean by _applicationUseDarkTheme
+
+val _applicationColorScheme: MutableState<ColorScheme> = mutableStateOf(getTheme(applicationUseDarkTheme))
+val applicationColorScheme: ColorScheme by _applicationColorScheme
+
