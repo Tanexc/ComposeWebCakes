@@ -17,6 +17,7 @@ import kotlinx.browser.localStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.component.inject
+import org.w3c.dom.get
 
 class ClientRepositoryImpl : ClientRepository {
     override fun getClientId(): Flow<String> = flow {
@@ -53,9 +54,9 @@ class ClientRepositoryImpl : ClientRepository {
         emit(Theme(themeId, useDarkTheme))
     }
 
-    override fun setTheme(theme: Theme) {
-        localStorage.setItem("useDarkTheme", "${theme.useDarkTheme}")
-        localStorage.setItem("themeId", "${theme.id}")
+    override fun setTheme(value: Theme) {
+        localStorage.setItem("useDarkTheme", "${value.useDarkTheme}")
+        localStorage.setItem("themeId", "${value.id}")
     }
 
     override fun getLocale(): Int {
@@ -69,5 +70,11 @@ class ClientRepositoryImpl : ClientRepository {
 
     override fun setLocale(localeId: Int) {
         localStorage.setItem("locale", "$localeId")
+    }
+
+    override fun getToken(): String? = localStorage.getItem("token")
+
+    override fun setToken(value: String) {
+        localStorage.setItem("token", value)
     }
 }

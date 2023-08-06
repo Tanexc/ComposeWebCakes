@@ -15,10 +15,14 @@ interface ClientRepository: KoinComponent {
 
     fun getTheme(): Flow<Theme>
 
-    fun setTheme(theme: Theme)
+    fun setTheme(value: Theme)
 
     fun getLocale(): Int
 
     fun setLocale(localeId: Int)
+
+    fun getToken(): String?
+
+    fun setToken(value: String)
 
 }
