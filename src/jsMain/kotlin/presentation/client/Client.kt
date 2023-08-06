@@ -2,6 +2,7 @@ package presentation.client
 
 import core.di.clientModule
 import core.di.useCaseModule
+import kotlinx.browser.localStorage
 import org.jetbrains.skiko.wasm.onWasmReady
 import org.koin.core.context.startKoin
 import presentation.features.application.ClientMainApp
@@ -15,10 +16,12 @@ import presentation.style.ui.theme.applicationUseDarkTheme
 fun main() {
 
     startKoin {
-        modules(listOf(
-            clientModule,
-            useCaseModule
-        ))
+        modules(
+            listOf(
+                clientModule,
+                useCaseModule
+            )
+        )
     }
 
     onWasmReady {
@@ -26,9 +29,9 @@ fun main() {
             title = Strings.EN(appName),
             canvasElementId = "ComposeTarget"
         ) {
-            ClientTheme(applicationUseDarkTheme) {
-                ClientMainApp()
-            }
+
+            ClientMainApp()
+
         }
     }
 }
