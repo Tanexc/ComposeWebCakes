@@ -13,20 +13,20 @@ import util.State
 class MessageRepositoryImpl: MessageRepository {
     private val messageApi: MessageApi by inject()
 
-    override suspend fun getById(id: Long): Flow<State<Message>> = flow {
-        emit(State.Processing())
+    override suspend fun getById(id: Long): State<Message> {
         val respond = messageApi.getById(id)
-        when(val user = respond.data) {
+        return when(val user = respond.data) {
             is Message -> {
-                emit(State.Success(user))
+                State.Success(user)
             }
+
             else -> {
-                emit(State.Error(message = respond.message?: "get by id error"))
+                State.Error(message = respond.message?: "get by id error")
             }
         }
     }
 
-    override suspend fun getByClientId(clientId: String): Flow<State<List<Message>>> = flow {
+    override fun getByClientId(clientId: String): Flow<State<List<Message>>> = flow {
         emit(State.Processing())
         val respond = messageApi.getByClientId(clientId)
         when(val user = respond.data) {
