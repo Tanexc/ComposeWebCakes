@@ -23,7 +23,7 @@ class UserApiImpl : UserApi {
 
     @OptIn(InternalAPI::class)
     override suspend fun signUp(data: User, password: String): RespondData<User> =
-        client.post(urlString = "http://${HOST}${SIGN_UP_USER}") {
+        client.post(urlString = "http://${HOST}/${SIGN_UP_USER}") {
             body = FormDataContent(
                 Parameters.build {
                     append("name", data.name)
@@ -35,7 +35,7 @@ class UserApiImpl : UserApi {
         }.body()
 
     override suspend fun signIn(login: String, password: String): RespondData<User> =
-        client.get(urlString = "http://${HOST}${SIGN_IN_USER}") {
+        client.get(urlString = "http://${HOST}/${SIGN_IN_USER}") {
             url.parameters.appendAll(
                 parametersOf(
                     "login" to listOf(login),
@@ -46,7 +46,7 @@ class UserApiImpl : UserApi {
 
 
     override suspend fun getByToken(token: String): RespondData<User> =
-        client.get(urlString = "http://${HOST}${GET_USER_BY_TOKEN}") {
+        client.get(urlString = "http://${HOST}/${GET_USER_BY_TOKEN}") {
             url.parameters.append(
                 "token", token
             )
@@ -54,14 +54,14 @@ class UserApiImpl : UserApi {
 
 
     override suspend fun getById(id: Long): RespondData<User> =
-        client.get(urlString = "http://${HOST}${GET_USER}") {
+        client.get(urlString = "http://${HOST}/${GET_USER}") {
             url.parameters.append(
                 "userId", id.toString()
             )
         }.body()
 
     override suspend fun updatePassword(token: String, newPassword: String): RespondData<User> =
-        client.post(urlString = "http://${HOST}${UPDATE_PASSWORD}") {
+        client.post(urlString = "http://${HOST}/${UPDATE_PASSWORD}") {
             url.parameters.appendAll(
                 parametersOf(
                     "token" to listOf(token),
@@ -71,7 +71,7 @@ class UserApiImpl : UserApi {
         }.body()
 
     override suspend fun updateChatIds(token: String, id: Long): RespondData<User> =
-        client.post(urlString = "http://${HOST}${UPDATE_CHATS_USER}") {
+        client.post(urlString = "http://${HOST}/${UPDATE_CHATS_USER}") {
             url.parameters.appendAll(
                 parametersOf(
                     "token" to listOf(token),

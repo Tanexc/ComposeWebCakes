@@ -15,7 +15,7 @@ class MessageApiImpl: MessageApi {
     private val client: HttpClient by inject()
 
     override suspend fun getById(id: Long): RespondData<Message> =
-        client.get(urlString = "http://${Application.HOST}${Api.GET_MESSAGE}") {
+        client.get(urlString = "http://${Application.HOST}/${Api.GET_MESSAGE}") {
             url.parameters.appendAll(
                 parametersOf(
                     "id" to listOf(id.toString())
@@ -24,7 +24,7 @@ class MessageApiImpl: MessageApi {
         }.body()
 
     override suspend fun getByClientId(clientId: String): RespondData<List<Message>> =
-        client.get(urlString = "http://${Application.HOST}${Api.GET_MESSAGES}") {
+        client.get(urlString = "http://${Application.HOST}/${Api.GET_MESSAGES}") {
             url.parameters.appendAll(
                 parametersOf(
                     "clientId" to listOf(clientId)
