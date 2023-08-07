@@ -8,11 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import core.util.HashTool
 import core.util.Screen
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import presentation.features.application.controller.MainController
 import presentation.features.chat.chatScreen.ChatScreen
 import presentation.features.info.InfoScreen

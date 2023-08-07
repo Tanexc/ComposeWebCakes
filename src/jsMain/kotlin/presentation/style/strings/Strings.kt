@@ -16,6 +16,11 @@ object Strings {
     const val useDarkTheme: Int = 6
     const val client: Int = 7
     const val typeName: Int = 8
+    const val name: Int = 9
+    const val login: Int = 10
+    const val surname: Int = 11
+    const val password: Int = 12
+    const val language: Int = 13
 
     object EN: StringResources {
         override val strings = mapOf(
@@ -27,7 +32,12 @@ object Strings {
             typeMessage to "Type message...",
             useDarkTheme to "Dark Theme",
             client to "Client",
-            typeName to "Enter a name"
+            typeName to "Enter a name",
+            name to "Name",
+            login to "Login",
+            surname to "Surname",
+            password to "Password",
+            language to "Language"
         )
 
         override fun invoke(): Int = 0
@@ -43,8 +53,13 @@ object Strings {
             settings to "Настройки",
             typeMessage to "Напишите сообщение...",
             useDarkTheme to "Тёмная тема",
+            language to "Язык",
             client to "Пользователь",
-            typeName to "Введите имя"
+            typeName to "Введите имя",
+            name to "Имя",
+            login to "Логин",
+            surname to "Фамилия",
+            password to "Пароль"
         )
 
         override fun invoke(): Int = 1
