@@ -90,6 +90,7 @@ kotlin {
                 // Ktor
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-client-websockets:$ktorVersion")
 
                 // Skiko
                 implementation("org.jetbrains.skiko:skiko-js:$skikoVersion")
