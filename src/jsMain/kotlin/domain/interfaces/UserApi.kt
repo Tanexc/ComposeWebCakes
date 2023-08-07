@@ -2,9 +2,7 @@ package domain.interfaces
 
 import domain.model.RespondData
 import domain.model.User
-import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
-import util.State
 
 interface UserApi: KoinComponent {
     suspend fun signUp(data: User, password: String): RespondData<User>

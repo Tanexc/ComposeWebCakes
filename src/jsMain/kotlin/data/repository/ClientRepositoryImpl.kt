@@ -1,23 +1,12 @@
 package data.repository
 
 
-import constants.Api.GET_MESSAGE
-import constants.Api.GET_MESSAGES
-import constants.Application.HOST
 import core.util.HashTool.generateClientId
-import domain.interfaces.ChatApi
-import domain.interfaces.UserApi
-import domain.model.Message
 import domain.model.Theme
 import domain.repository.ClientRepository
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
 import kotlinx.browser.localStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import org.koin.core.component.inject
-import org.w3c.dom.get
 
 class ClientRepositoryImpl : ClientRepository {
     override fun getClientId(): Flow<String> = flow {

@@ -4,7 +4,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import constants.Application.HOST
-import constants.Application.PORT
 import constants.Websocket.CHAT_WEBSOCKET
 import domain.interfaces.WebsocketService
 import domain.model.Message
@@ -12,8 +11,9 @@ import io.ktor.client.*
 import io.ktor.client.plugins.websocket.*
 import io.ktor.serialization.*
 import io.ktor.websocket.*
-import io.ktor.websocket.serialization.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.receiveAsFlow
 import org.koin.core.component.inject
 import util.exceptions.WebsocketWasClosed
 

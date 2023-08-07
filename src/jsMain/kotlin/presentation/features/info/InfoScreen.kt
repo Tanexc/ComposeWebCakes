@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import presentation.features.info.components.InfoCard
 import presentation.style.ui.theme.applicationColorScheme
 import presentation.style.ui.theme.applicationUseDarkTheme
-import presentation.style.ui.theme.getTheme
 
 @Composable
 fun InfoScreen() {

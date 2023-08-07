@@ -1,11 +1,9 @@
 package presentation.features.chat.controller
 
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import data.websocket.chat.ChatWebsocketServiceImpl
-import domain.interfaces.WebsocketService
 import domain.model.Chat
 import domain.model.Message
 import domain.repository.ClientRepository
@@ -16,10 +14,6 @@ import domain.use_case.message.MessageGetByIdUseCase
 import io.ktor.util.date.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

@@ -6,10 +6,7 @@ import data.repository.ClientRepositoryImpl
 import data.websocket.chat.ChatWebsocketServiceImpl
 import domain.interfaces.ChatApi
 import domain.interfaces.UserApi
-import domain.interfaces.WebsocketService
-import domain.model.Message
 import domain.repository.ClientRepository
-import domain.repository.UserRepository
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.websocket.*

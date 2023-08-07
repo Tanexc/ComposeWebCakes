@@ -14,7 +14,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import presentation.style.ui.theme._applicationColorScheme
 import presentation.style.ui.theme._applicationUseDarkTheme
-import presentation.style.ui.theme.applicationColorScheme
 import presentation.style.ui.theme.getTheme
 import util.State
 

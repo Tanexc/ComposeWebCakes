@@ -8,18 +8,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import presentation.features.chat.components.MessageBubble
 import presentation.features.chat.controller.ClientChatController
-import presentation.style.icons.filled.IconFilledSend
 import presentation.style.ui.theme.applicationColorScheme
-import presentation.style.ui.theme.applicationUseDarkTheme
 
 @Composable
 fun ClientChatScreen() {
