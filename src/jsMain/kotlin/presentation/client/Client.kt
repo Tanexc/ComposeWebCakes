@@ -1,6 +1,8 @@
 package presentation.client
 
+import core.di.apiModule
 import core.di.clientModule
+import core.di.controllerModule
 import core.di.useCaseModule
 import core.util.HashTool
 import kotlinx.browser.localStorage
@@ -23,7 +25,9 @@ fun main() {
         modules(
             listOf(
                 clientModule,
-                useCaseModule
+                useCaseModule,
+                apiModule,
+                controllerModule
             )
         )
     }
