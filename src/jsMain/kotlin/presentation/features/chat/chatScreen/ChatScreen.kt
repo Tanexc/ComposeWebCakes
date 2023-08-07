@@ -2,6 +2,7 @@ package presentation.features.chat.chatScreen
 
 import androidx.compose.foundation.VerticalScrollbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,27 +12,47 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
+import org.koin.core.Koin
+import org.koin.core.annotation.KoinExperimentalAPI
+import org.koin.core.annotation.KoinInternalApi
+import org.koin.core.annotation.KoinReflectAPI
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.context.GlobalContext
+import org.koin.core.module.KoinApplicationDslMarker
+import org.koin.core.module.KoinDslMarker
+import org.koin.dsl.KoinAppDeclaration
 import presentation.features.chat.components.MessageBubble
 import presentation.features.chat.controller.ClientChatController
 import presentation.style.icons.filled.IconFilledSend
+import presentation.style.strings.Strings.typeMessage
+import presentation.style.strings.applicationResources
 import presentation.style.ui.theme.applicationColorScheme
-import presentation.style.ui.theme.applicationUseDarkTheme
 
 @Composable
 fun ChatScreen() {
-    val controller = ClientChatController()
+    val controller: ClientChatController by GlobalContext.get().inject()
+
+    val messageText: MutableState<String> = remember {mutableStateOf("")}
     val lazyColumnState = rememberLazyListState()
+
+    LaunchedEffect(controller.messageList.size) {
+        if (controller.messageList.isNotEmpty()) {
+            lazyColumnState.animateScrollToItem(0)
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.align(Alignment.Center)) {
 
             Row(
                 modifier = Modifier
-                    .width(1280.dp)
+                    .widthIn(max = 804.dp)
                     .height(720.dp)
                     .padding(6.dp)
                     .background(
@@ -40,22 +61,25 @@ fun ChatScreen() {
                     )
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        state = lazyColumnState,
+                        reverseLayout = true
+                    ) {
                         items(controller.messageList) { messageItem ->
-
                             MessageBubble(
                                 message = messageItem,
                                 modifier = Modifier
                                     .background(
                                         applicationColorScheme.secondaryContainer.copy(0.6f),
                                         when (controller.messageList.indexOf(messageItem)) {
-                                            0 -> if (controller.clientId.toString() == messageItem.sender) {
+                                            (controller.messageList.lastIndex) -> if (controller.clientId.toString() == messageItem.sender) {
                                                 RoundedCornerShape(22.dp, 22.dp, 6.dp, 22.dp)
                                             } else {
                                                 RoundedCornerShape(22.dp, 22.dp, 22.dp, 6.dp)
                                             }
 
-                                            (controller.messageList.lastIndex) -> if (controller.clientId.toString() == messageItem.sender) {
+                                             0 -> if (controller.clientId.toString() == messageItem.sender) {
                                                 RoundedCornerShape(22.dp, 6.dp, 22.dp, 22.dp)
                                             } else {
                                                 RoundedCornerShape(6.dp, 22.dp, 22.dp, 22.dp)
@@ -76,40 +100,47 @@ fun ChatScreen() {
                             )
                         }
                     }
-                    VerticalScrollbar(
-                        modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .fillMaxHeight(),
-                        adapter = rememberScrollbarAdapter(
-                            scrollState = lazyColumnState
-                        )
-                    )
                 }
             }
 
             Row(
                 modifier = Modifier
-                    .width(1280.dp)
+                    .widthIn(max = 804.dp)
                     .wrapContentHeight()
                     .padding(6.dp)
             ) {
                 OutlinedTextField(
-                    value = controller.textFieldValue,
-                    onValueChange = { controller.updateTextFieldValue(it) },
+                    value = messageText.value,
+                    onValueChange = { messageText.value = it },
                     modifier = Modifier
                         .heightIn(48.dp, 256.dp)
                         .fillMaxWidth(),
                     placeholder = {
-                        Text("Type message...")
+                        Text(applicationResources(typeMessage))
                     },
                     label = null,
                     trailingIcon = {
-                        Icon(IconFilledSend, null)
+                        Icon(IconFilledSend,
+                            null,
+                            modifier = Modifier
+                                .clickable {
+                                    controller.sendMessage(messageText.value)
+                                    messageText.value = ""
+                                }
+                        )
                     }
                 )
             }
         }
-
+        VerticalScrollbar(
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .fillMaxHeight(),
+            adapter = rememberScrollbarAdapter(
+                scrollState = lazyColumnState
+            ),
+            reverseLayout = true
+        )
 
     }
 }

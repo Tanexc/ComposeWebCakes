@@ -93,8 +93,8 @@ fun ClientChatScreen() {
                     .wrapContentHeight()
                     .padding(6.dp)
             ) {
-                OutlinedTextField(
-                    value = controller.textFieldValue,
+                /*OutlinedTextField(
+                    value = ,
                     onValueChange = { controller.updateTextFieldValue(it) },
                     modifier = Modifier
                         .heightIn(48.dp, 256.dp)
@@ -106,7 +106,7 @@ fun ClientChatScreen() {
                     trailingIcon = {
                         Icon(IconFilledSend, null)
                     }
-                )
+                )*/
             }
         }
 
