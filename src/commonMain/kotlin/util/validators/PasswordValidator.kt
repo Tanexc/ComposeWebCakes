@@ -1,4 +1,4 @@
-package ru.tanexc.application.core.util.validatiors
+package util.validators
 
 object PasswordValidator {
     private const val minLength = 8
