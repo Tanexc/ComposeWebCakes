@@ -15,6 +15,7 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.util.*
 import org.koin.core.component.inject
 
@@ -22,10 +23,11 @@ class UserApiImpl : UserApi {
     private val client: HttpClient by inject()
 
     @OptIn(InternalAPI::class)
-    override suspend fun signUp(data: User, password: String): RespondData<User> =
-        client.post(urlString = "http://${HOST}/${SIGN_UP_USER}") {
-            body = FormDataContent(
-                Parameters.build {
+    override suspend fun signUp(data: User, password: String): RespondData<User> {
+        println("COCK")
+        val cock: RespondData<User> = client.post(urlString = "http://${HOST}/${SIGN_UP_USER}") {
+            body = MultiPartFormDataContent(
+                formData {
                     append("name", data.name)
                     append("surname", data.name)
                     append("password", password)
@@ -33,6 +35,9 @@ class UserApiImpl : UserApi {
                 }
             )
         }.body()
+        println(cock)
+        return cock
+    }
 
     override suspend fun signIn(login: String, password: String): RespondData<User> =
         client.get(urlString = "http://${HOST}/${SIGN_IN_USER}") {
@@ -70,13 +75,14 @@ class UserApiImpl : UserApi {
             )
         }.body()
 
+    @OptIn(InternalAPI::class)
     override suspend fun updateChatIds(token: String, id: Long): RespondData<User> =
         client.post(urlString = "http://${HOST}/${UPDATE_CHATS_USER}") {
-            url.parameters.appendAll(
-                parametersOf(
-                    "token" to listOf(token),
-                    "chatId" to listOf(id.toString())
-                )
+            body = MultiPartFormDataContent(
+                formData {
+                    append("token", token),
+                    append("chatId", id.toString())
+                }
             )
         }.body()
 }
