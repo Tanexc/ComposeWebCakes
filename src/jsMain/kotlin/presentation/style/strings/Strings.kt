@@ -29,6 +29,11 @@ object Strings {
     const val simplePassword: Int = 19
     const val send: Int = 20
     const val forAdministration: Int = 21
+    const val administrator: Int = 22
+    const val error: Int = 23
+    const val ok: Int = 24
+    const val welcome: Int = 25
+    const val logout: Int = 26
 
     object EN: StringResources {
         override val strings = mapOf(
@@ -48,12 +53,17 @@ object Strings {
             language to "Language",
             repeatPassword to "Repeat password",
             registration to "Registration",
-            enter to "Enter",
+            enter to "Sign In",
             requiredField to "Required field",
             wrongPassword to "Wrong password",
             simplePassword to "Simple password",
             send to "Send",
-            forAdministration to "For administration"
+            forAdministration to "For administration",
+            administrator to "Administrator",
+            error to "Error",
+            ok to "Ok",
+            welcome to "Welcome",
+            logout to "Logout"
 
 
         )
@@ -85,7 +95,12 @@ object Strings {
             wrongPassword to "Неверный пароль",
             simplePassword to "Простой пароль",
             send to "Отправить",
-            forAdministration to "Для администрации"
+            forAdministration to "Для администрации",
+            administrator to "Администратор",
+            error to "Ошибка",
+            ok to "Хорошо",
+            welcome to "Добро пожаловать",
+            logout to "Выход"
         )
 
         override fun invoke(): Int = 1
@@ -102,7 +117,7 @@ fun getResources(locale: Int): StringResources {
     }
 }
 
-val _applicationResources: MutableState<StringResources> = mutableStateOf(Strings.RU)
+val _applicationResources: MutableState<StringResources> = mutableStateOf(Strings.EN)
 val applicationResources: StringResources by _applicationResources
 
 
