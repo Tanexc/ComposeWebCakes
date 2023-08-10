@@ -35,7 +35,7 @@ class UserDaoImpl : UserDao {
                     }
                     .firstOrNull()
             }
-        }?.copy(password = ByteArray(0), chatIds = emptyList(), token = "")
+        }?.copy(password = "", chatIds = emptyList(), token = "")
 
     override suspend fun edit(user: User): Unit =
         dbQuery {

@@ -10,7 +10,6 @@ import ru.tanexc.application.core.util.JwtTool.generateToken
 import ru.tanexc.application.core.util.JwtTool.isNotExpired
 import ru.tanexc.application.core.util.PasswordHashTool.getHash
 import ru.tanexc.application.core.util.PasswordHashTool.verifyHash
-import ru.tanexc.application.core.util.validatiors.PasswordValidator.isValid
 import ru.tanexc.application.domain.interfaces.UserDao
 import ru.tanexc.application.domain.repository.UserRepository
 import util.State
@@ -18,6 +17,7 @@ import util.exceptions.DataIsNull
 import util.exceptions.InvalidData
 import util.exceptions.TokenExpired
 import util.exceptions.WrongCredentials
+import util.validators.PasswordValidator.isValid
 
 class UserRepositoryImpl : UserRepository, KoinComponent {
     private val userDao: UserDao by inject()
