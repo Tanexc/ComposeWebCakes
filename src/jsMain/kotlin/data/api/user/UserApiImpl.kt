@@ -80,7 +80,7 @@ class UserApiImpl : UserApi {
         client.post(urlString = "http://${HOST}/${UPDATE_CHATS_USER}") {
             body = MultiPartFormDataContent(
                 formData {
-                    append("token", token),
+                    append("token", token)
                     append("chatId", id.toString())
                 }
             )

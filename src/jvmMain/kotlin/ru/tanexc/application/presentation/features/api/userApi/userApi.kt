@@ -37,7 +37,7 @@ fun Routing.userApi() {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
-                            call.respond(RespondData(listOf(user as Domain)))
+                            call.respond(RespondData(user as Domain))
                         } ?: DataIsNull()
                     }
 
@@ -60,7 +60,7 @@ fun Routing.userApi() {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
-                            call.respond(RespondData(listOf(user as Domain)))
+                            call.respond(RespondData(user as Domain))
                         } ?: DataIsNull()
                     }
 
@@ -83,7 +83,7 @@ fun Routing.userApi() {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
-                            call.respond(RespondData(listOf(user as Domain)))
+                            call.respond(RespondData(user))
                         } ?: DataIsNull()
                     }
 
@@ -125,7 +125,7 @@ fun Routing.userApi() {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
-                            call.respond(RespondData(listOf(user as Domain)))
+                            call.respond(RespondData(user as Domain))
                         } ?: DataIsNull()
                     }
 
@@ -157,7 +157,7 @@ fun Routing.userApi() {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
-                            call.respond(RespondData(listOf(user as Domain)))
+                            call.respond(RespondData(user as Domain))
                         } ?: DataIsNull()
                     }
 
@@ -189,7 +189,7 @@ fun Routing.userApi() {
                 when (it) {
                     is State.Success -> {
                         it.data?.let { user ->
-                            call.respond(RespondData(listOf(user as Domain)))
+                            call.respond(RespondData(user as Domain))
                         } ?: DataIsNull()
                     }
 
