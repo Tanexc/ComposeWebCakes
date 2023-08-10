@@ -54,17 +54,19 @@ fun RegistrationForm(
         }
     }
 
-    Text(
-        applicationResources(registration),
-        style = Typography.titleLarge,
-        textAlign = TextAlign.Start
-    )
-    Spacer(Modifier.size(8.dp))
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
+        Text(
+            applicationResources(registration),
+            style = Typography.titleLarge,
+            textAlign = TextAlign.Start,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(Modifier.size(8.dp))
         OutlinedTextField(
             value = name,
             onValueChange = { name = it.trim() },
