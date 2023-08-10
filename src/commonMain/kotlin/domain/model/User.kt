@@ -10,7 +10,7 @@ data class User(
     val surname: String,
     val chatIds: List<Long> = emptyList(),
     val creationTimestamp: Long = 0,
-    val password: ByteArray = ByteArray(0),
+    val password: String = "",
     val token: String = ""
 ): Domain() {
     override fun equals(other: Any?): Boolean {
@@ -25,7 +25,7 @@ data class User(
         if (surname != other.surname) return false
         if (chatIds != other.chatIds) return false
         if (creationTimestamp != other.creationTimestamp) return false
-        if (!password.contentEquals(other.password)) return false
+        if (password != other.password) return false
         return token == other.token
     }
 
@@ -36,9 +36,8 @@ data class User(
         result = 31 * result + surname.hashCode()
         result = 31 * result + chatIds.hashCode()
         result = 31 * result + creationTimestamp.hashCode()
-        result = 31 * result + password.contentHashCode()
+        result = 31 * result + password.hashCode()
         result = 31 * result + token.hashCode()
         return result
     }
-
 }

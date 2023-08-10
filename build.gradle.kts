@@ -76,11 +76,11 @@ kotlin {
                 // Serialization
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
-                // Bcrypt
-                implementation("de.nycode:bcrypt:2.3.0")
-
                 // Koin
                 implementation("io.insert-koin:koin-core:$koinVersion")
+
+                // Bcrypt
+                implementation("at.favre.lib:bcrypt:0.10.2")
             }
         }
 

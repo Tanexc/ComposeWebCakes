@@ -19,7 +19,11 @@ val clientModule = module {
     single {
         HttpClient {
             install(ContentNegotiation) {
-                json()
+                json(
+                    Json {
+                        ignoreUnknownKeys = true
+                    }
+                )
             }
 
             install(WebSockets) {

@@ -17,7 +17,7 @@ object UserTable : Table(), DatabaseEntity {
 
     val chatIds = text("chatIds")
     val creationTimestamp = long("creationTimestamp")
-    val password = binary("password", length = 256)
+    val password = text("password")
     val token = varchar("token",512)
 
     override suspend fun asDomain(getResult: suspend (Table) -> ResultRow?): User? {
