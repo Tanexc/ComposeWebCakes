@@ -65,7 +65,7 @@ class MainController: KoinComponent {
         _currentScreen.value = value
     }
 
-    fun updateUser(value: User) {
+    fun updateUser(value: User?) {
         _user.value = value
     }
 }
