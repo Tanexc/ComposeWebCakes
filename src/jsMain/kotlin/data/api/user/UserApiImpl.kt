@@ -29,7 +29,7 @@ class UserApiImpl : UserApi {
             body = MultiPartFormDataContent(
                 formData {
                     append("name", data.name)
-                    append("surname", data.name)
+                    append("surname", data.surname)
                     append("password", password)
                     append("login", data.login)
                 }
