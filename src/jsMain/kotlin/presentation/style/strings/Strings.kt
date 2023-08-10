@@ -21,6 +21,14 @@ object Strings {
     const val surname: Int = 11
     const val password: Int = 12
     const val language: Int = 13
+    const val repeatPassword: Int = 14
+    const val registration: Int = 15
+    const val enter: Int = 16
+    const val requiredField: Int = 17
+    const val wrongPassword: Int = 18
+    const val simplePassword: Int = 19
+    const val send: Int = 20
+    const val forAdministration: Int = 21
 
     object EN: StringResources {
         override val strings = mapOf(
@@ -37,7 +45,17 @@ object Strings {
             login to "Login",
             surname to "Surname",
             password to "Password",
-            language to "Language"
+            language to "Language",
+            repeatPassword to "Repeat password",
+            registration to "Registration",
+            enter to "Enter",
+            requiredField to "Required field",
+            wrongPassword to "Wrong password",
+            simplePassword to "Simple password",
+            send to "Send",
+            forAdministration to "For administration"
+
+
         )
 
         override fun invoke(): Int = 0
@@ -59,7 +77,15 @@ object Strings {
             name to "Имя",
             login to "Логин",
             surname to "Фамилия",
-            password to "Пароль"
+            password to "Пароль",
+            repeatPassword to "Повторите пароль",
+            registration to "Регистрация",
+            enter to "Вход",
+            requiredField to "Необходимое поле",
+            wrongPassword to "Неверный пароль",
+            simplePassword to "Простой пароль",
+            send to "Отправить",
+            forAdministration to "Для администрации"
         )
 
         override fun invoke(): Int = 1
