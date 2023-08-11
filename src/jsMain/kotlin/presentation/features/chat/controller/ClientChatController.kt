@@ -23,6 +23,7 @@ class ClientChatController : KoinComponent {
     private val clientRepository: ClientRepository by inject()
 
     val chatWebsocketService: ChatWebsocketServiceImpl by inject()
+    private var websocketConnectionEnabled: Boolean = false
 
     private val getChatByIdUseCase: ChatGetByClientIdUseCase by inject()
     private val createChatUseCase: ChatCreateUseCase by inject()
@@ -52,38 +53,35 @@ class ClientChatController : KoinComponent {
     val chat: Chat? by _chat
 
     init {
-        _clientName.value = clientRepository.getClientName()
+        updateName()
         initializeChat()
     }
 
-    private fun initializeChat() {
-        CoroutineScope(Dispatchers.Default).launch {
-            clientRepository.getClientId().collect {
-                _clientId.value = it
-            }
+    fun initializeChat() {
+        if (chat == null) {
+            CoroutineScope(Dispatchers.Default).launch {
+                clientRepository.getClientId().collect {
+                    _clientId.value = it
+                }
 
-            if (clientName == null) _showInsertNameDialog.value = true
-            else getChat(clientId!!, clientName!!)
+                if (clientName == null) _showInsertNameDialog.value = true
+                else getChat(clientId!!, clientName!!)
 
-        }.invokeOnCompletion {
-            if (clientName != null) {
-                CoroutineScope(Dispatchers.Default).launch {
-                    getChatMessages(clientId!!)
-                    chatWebsocketService(
-                        clientId = clientId!!,
-                        clientName = clientName!!
-                    )?.collect {
-                        _messageList.value = listOf(it) + _messageList.value
+            }.invokeOnCompletion {
+                if (clientName != null && !websocketConnectionEnabled) {
+                    websocketConnectionEnabled = true
+                    CoroutineScope(Dispatchers.Default).launch {
+                        getChatMessages(clientId!!)
+                        chatWebsocketService(
+                            clientId = clientId!!,
+                            clientName = clientName!!
+                        )?.collect {
+                            _messageList.value = listOf(it) + _messageList.value
+                        }
                     }
                 }
             }
         }
-    }
-
-    fun setClientName(value: String) {
-        clientRepository.setClientName(value)
-        _clientName.value = value
-        initializeChat()
     }
 
     private suspend fun getChat(clientId: String, clientName: String) {
@@ -141,12 +139,12 @@ class ClientChatController : KoinComponent {
         return getMessageByIdUseCase(id).data
     }
 
-    fun sendMessage(text: String) {
+    fun sendMessage(text: String, replyTo: Long? = null) {
         CoroutineScope(Dispatchers.Default).launch {
             clientId?.let { sender -> chatWebsocketService.send(
                 Message(
                     id = -1L,
-                    replyTo = null,
+                    replyTo = replyTo,
                     sender = sender,
                     text = text,
                     timestamp = getTimeMillis()
@@ -155,6 +153,14 @@ class ClientChatController : KoinComponent {
             }
         }
 
+    }
+
+    fun updateName() {
+        if (clientName == null) {
+            _clientName.value = clientRepository.getClientName()
+        } else {
+            _showInsertNameDialog.value = false
+        }
     }
 
 }

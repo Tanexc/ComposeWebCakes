@@ -10,7 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import core.util.Screen
 import presentation.features.application.controller.MainController
-import presentation.features.chat.chatScreen.ChatScreen
+import presentation.features.chat.clientChatScreen.ChatScreen
 import presentation.features.info.InfoScreen
 import presentation.features.settings.SettingsScreen
 import presentation.style.strings.applicationResources
