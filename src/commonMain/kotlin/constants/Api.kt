@@ -9,6 +9,7 @@ object Api {
     const val GET_CHAT = "api/chat/get" // get chat by client id if exist
     const val GET_NEW_CHAT = "api/chat/get/new" // get new chat with client id of not exist
     const val POST_MESSAGE_INTO_CHAT = "api/chat/post/message" // post message into chat
+    const val GET_ALL_CHATS = "api/chat/get/all" // get all chat. token required
 
     // User api
     const val GET_USER = "api/user/get/id" // get chat by user id
