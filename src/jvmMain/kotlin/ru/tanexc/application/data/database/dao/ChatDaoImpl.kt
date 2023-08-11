@@ -3,8 +3,10 @@ package ru.tanexc.application.data.database.dao
 import domain.model.Chat
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
 import ru.tanexc.application.data.database.entity.ChatTable
+import ru.tanexc.application.data.database.entity.ChatTable.asDomain
 import ru.tanexc.application.data.database.factory.DatabaseFactory.dbQuery
 import ru.tanexc.application.domain.interfaces.ChatDao
 
@@ -62,6 +64,14 @@ class ChatDaoImpl : ChatDao {
                 row[newMessagesCount] = chat.newMessagesCount
                 row[messages] = chat.messages.joinToString(" ")
 
+            }
+    }
+
+    override suspend fun getAll(): List<Chat> = dbQuery {
+        ChatTable
+            .selectAll()
+            .map {
+                it.asDomain()
             }
     }
 

@@ -14,4 +14,6 @@ interface ChatRepository {
     fun createChat(clientId: String, title: String?): Flow<State<Chat>>
 
     fun insertMessage(chatData: Chat, data: Message): Flow<State<Chat>>
+
+    fun getAllChats(token: String): Flow<State<List<Chat>>>
 }

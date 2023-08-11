@@ -10,4 +10,6 @@ interface ChatDao {
     suspend fun getByClientId(clientId: String): Chat?
 
     suspend fun edit(chat: Chat)
+
+    suspend fun getAll(): List<Chat>
 }
