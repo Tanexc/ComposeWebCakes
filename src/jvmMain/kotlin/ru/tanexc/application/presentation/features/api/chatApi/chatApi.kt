@@ -1,21 +1,19 @@
 package ru.tanexc.application.presentation.features.api.chatApi
 
+import constants.Api.GET_ALL_CHATS
 import constants.Api.GET_CHAT
 import constants.Api.GET_NEW_CHAT
 import constants.Api.POST_MESSAGE_INTO_CHAT
-import domain.model.Domain
-import domain.model.Message
-import domain.model.RespondData
+import domain.model.*
 import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.coroutines.*
 import org.koin.ktor.ext.inject
-import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatCreateUseCase
-import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatGetByClientIdUseCase
-import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatGetByIdUseCase
-import ru.tanexc.application.domain.use_cases.chat_use_cases.ChatInsertMessageUseCase
+import ru.tanexc.application.domain.use_cases.chat_use_cases.*
+import ru.tanexc.application.domain.use_cases.user_use_cases.UserGetByTokenUseCase
 import util.State
 import util.exceptions.DataIsNull
 import util.exceptions.InvalidData
@@ -25,6 +23,9 @@ fun Routing.chatApi() {
     val chatGetByIdUseCase: ChatGetByIdUseCase by inject()
     val chatGetByClientIdUseCase: ChatGetByClientIdUseCase by inject()
     val chatInsertMessageUseCase: ChatInsertMessageUseCase by inject()
+    val chatGetAllUseCase: ChatGetAllUseCase by inject()
+
+    val userGetByTokenUseCase: UserGetByTokenUseCase by inject()
 
     get(GET_CHAT) {
         try {
@@ -123,6 +124,26 @@ fun Routing.chatApi() {
         } catch (e: Exception) {
             call.respond(RespondData<String>(message = e.message))
         }
+
+    }
+
+    get(GET_ALL_CHATS) {
+
+        try {
+            val token: String = call.request.queryParameters["token"] ?: throw InvalidData()
+
+            chatGetAllUseCase(token).collect {state ->
+                when (state) {
+                    is State.Error -> throw Exception()
+                    is State.Success -> call.respond(RespondData(state.data))
+                    else -> {}
+                }
+            }
+
+        } catch (e: Exception) {
+            call.respond(RespondData<String>(message = e.message))
+        }
+
 
     }
 

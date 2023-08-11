@@ -5,7 +5,7 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.Table
 import ru.tanexc.application.domain.interfaces.DatabaseEntity
 
-object ChatTable: Table(), DatabaseEntity {
+object ChatTable : Table(), DatabaseEntity {
 
     val id = long("id").autoIncrement()
 
@@ -20,7 +20,7 @@ object ChatTable: Table(), DatabaseEntity {
     override suspend fun asDomain(
         getResult: suspend (Table) -> ResultRow?
     ): Chat? {
-        val data = getResult(this)?: return null
+        val data = getResult(this) ?: return null
 
         return Chat(
             id = data[id],
@@ -32,4 +32,13 @@ object ChatTable: Table(), DatabaseEntity {
         )
 
     }
+
+    fun ResultRow.asDomain() = Chat(
+        id = this[id],
+        clientId = this[clientId],
+        messages = this[messages].split(" ").mapNotNull { it.toLongOrNull() },
+        creationTimestamp = this[creationTimestamp],
+        newMessagesCount = this[newMessagesCount],
+        title = this[title]
+    )
 }
