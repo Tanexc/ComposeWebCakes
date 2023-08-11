@@ -34,6 +34,7 @@ object Strings {
     const val ok: Int = 24
     const val welcome: Int = 25
     const val logout: Int = 26
+    const val nameWarning: Int = 27
 
     object EN: StringResources {
         override val strings = mapOf(
@@ -63,7 +64,8 @@ object Strings {
             error to "Error",
             ok to "Ok",
             welcome to "Welcome",
-            logout to "Logout"
+            logout to "Logout",
+            nameWarning to "Before using the chat, enter a name in the settings"
 
 
         )
@@ -100,7 +102,8 @@ object Strings {
             error to "Ошибка",
             ok to "Хорошо",
             welcome to "Добро пожаловать",
-            logout to "Выход"
+            logout to "Выход",
+            nameWarning to "Перед использованием чата введите имя в настройках"
         )
 
         override fun invoke(): Int = 1
