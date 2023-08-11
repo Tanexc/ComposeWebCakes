@@ -295,15 +295,6 @@ fun SettingsScreen(
                     } else if (controller.user == null) {
                         Row(modifier = Modifier.align(End)) {
                             Text(
-                                text = applicationResources(enter),
-                                modifier = Modifier
-                                    .padding(4.dp)
-                                    .clickable {
-                                        showRegisterForm = false
-                                        showSignInForm = true
-                                    }
-                            )
-                            Text(
                                 text = applicationResources(registration),
                                 modifier = Modifier
                                     .padding(4.dp)
@@ -311,6 +302,15 @@ fun SettingsScreen(
                                         showSignInForm = false
                                         showRegisterForm = true
                                     },
+                            )
+                            Text(
+                                text = applicationResources(enter),
+                                modifier = Modifier
+                                    .padding(4.dp)
+                                    .clickable {
+                                        showRegisterForm = false
+                                        showSignInForm = true
+                                    }
                             )
                         }
 
@@ -364,7 +364,7 @@ fun SettingsScreen(
                                     .padding(4.dp)
                                     .clickable {
                                         showRegisterForm = false
-                                        showSignInForm = true
+                                        showSignInForm = false
                                         controller.exitUser(
                                             onUserUpdate = {
                                                 onUserUpdate(it)

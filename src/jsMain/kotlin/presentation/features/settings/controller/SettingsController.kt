@@ -44,7 +44,7 @@ class SettingsController : KoinComponent {
     private val _stateProcessing: MutableState<Boolean> = mutableStateOf(false)
     val stateProcessing: Boolean by _stateProcessing
 
-    private val _dialogToShow: MutableState<Dialogs> = mutableStateOf(Dialogs.Success)
+    private val _dialogToShow: MutableState<Dialogs> = mutableStateOf(Dialogs.None)
     val dialogToShow: Dialogs by _dialogToShow
 
     private val _dialogMessage: MutableState<String> = mutableStateOf("")

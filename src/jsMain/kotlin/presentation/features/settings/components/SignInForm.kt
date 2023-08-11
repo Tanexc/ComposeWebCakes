@@ -1,6 +1,5 @@
 package presentation.features.settings.components
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -28,8 +27,6 @@ fun SignInForm(
 ) {
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-
-    val wrongPassword by remember { mutableStateOf(false) }
 
     val isSubmited by remember { mutableStateOf(false) }
 
