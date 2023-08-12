@@ -3,6 +3,7 @@ package presentation.features.chat.controller
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import core.util.Dialogs
 import data.websocket.chat.ChatWebsocketServiceImpl
 import domain.model.Chat
 import domain.model.Message
@@ -37,9 +38,6 @@ class ClientChatController : KoinComponent {
     private val _showInsertNameDialog: MutableState<Boolean> = mutableStateOf(false)
     val showInsertNameDialog: Boolean by _showInsertNameDialog
 
-    private val _showErrorDialog: MutableState<Boolean> = mutableStateOf(false)
-    val showErrorDialog: Boolean by _showErrorDialog
-
     private val _loading: MutableState<Boolean> = mutableStateOf(false)
     val isLoading: Boolean by _loading
 
@@ -51,6 +49,12 @@ class ClientChatController : KoinComponent {
 
     private val _chat: MutableState<Chat?> = mutableStateOf(null)
     val chat: Chat? by _chat
+
+    private val _dialogToShow: MutableState<Dialogs> = mutableStateOf(Dialogs.None)
+    val dialogToShow: Dialogs by _dialogToShow
+
+    private val _dialogMessage: MutableState<String> = mutableStateOf("")
+    val dialogMessage: String by _dialogMessage
 
     init {
         updateName()
@@ -95,7 +99,7 @@ class ClientChatController : KoinComponent {
 
                 else -> {
                     _loading.value = false
-                    _showErrorDialog.value = true
+                    _dialogToShow.value = Dialogs.Error
                 }
             }
         }
@@ -111,7 +115,7 @@ class ClientChatController : KoinComponent {
 
                     else -> {
                         _loading.value = false
-                        _showErrorDialog.value = true
+                        _dialogToShow.value = Dialogs.Error
                     }
                 }
             }
@@ -129,7 +133,7 @@ class ClientChatController : KoinComponent {
 
                 else -> {
                     _loading.value = false
-                    _showErrorDialog.value = true
+                    _dialogToShow.value = Dialogs.Error
                 }
             }
         }
@@ -141,7 +145,7 @@ class ClientChatController : KoinComponent {
 
     fun sendMessage(text: String, replyTo: Long? = null) {
         CoroutineScope(Dispatchers.Default).launch {
-            clientId?.let { sender -> chatWebsocketService.send(
+            clientName?.let { sender -> chatWebsocketService.send(
                 Message(
                     id = -1L,
                     replyTo = replyTo,
@@ -161,6 +165,10 @@ class ClientChatController : KoinComponent {
         } else {
             _showInsertNameDialog.value = false
         }
+    }
+
+    fun closeDialog() {
+        _dialogToShow.value = Dialogs.None
     }
 
 }

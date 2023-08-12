@@ -11,9 +11,9 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -27,9 +27,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.koin.core.context.GlobalContext
-import org.w3c.dom.events.KeyboardEventInit
 import presentation.features.chat.components.MessageBubble
 import presentation.features.chat.controller.ClientChatController
+import presentation.features.util.shapes.Shape
 import presentation.style.icons.filled.IconFilledSend
 import presentation.style.icons.rounded.IconRoundedCake
 import presentation.style.strings.Strings
@@ -81,43 +81,70 @@ fun ChatScreen() {
                 ) {
                     Box(modifier = Modifier.fillMaxSize()) {
 
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            state = lazyColumnState,
-                            reverseLayout = true
-                        ) {
-                            items(controller.messageList) { messageItem ->
-                                MessageBubble(
-                                    message = messageItem,
-                                    modifier = Modifier
-                                        .background(
-                                            applicationColorScheme.secondaryContainer.copy(0.6f),
-                                            when (controller.messageList.indexOf(messageItem)) {
-                                                (controller.messageList.lastIndex) -> if (controller.clientId.toString() == messageItem.sender) {
-                                                    RoundedCornerShape(22.dp, 22.dp, 6.dp, 22.dp)
-                                                } else {
-                                                    RoundedCornerShape(22.dp, 22.dp, 22.dp, 6.dp)
-                                                }
+                        if (controller.isLoading) {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .align(Center)
+                                    .size(48.dp)
+                            )
+                        } else {
+                            LazyColumn(
+                                modifier = Modifier.fillMaxSize(),
+                                state = lazyColumnState,
+                                reverseLayout = true
+                            ) {
+                                items(controller.messageList) { messageItem ->
 
-                                                0 -> if (controller.clientId.toString() == messageItem.sender) {
-                                                    RoundedCornerShape(22.dp, 6.dp, 22.dp, 22.dp)
-                                                } else {
-                                                    RoundedCornerShape(6.dp, 22.dp, 22.dp, 22.dp)
-                                                }
+                                    val bubbleShape: RoundedCornerShape = when (controller.messageList.indexOf(messageItem)) {
+                                        0 -> {
+                                                if (controller.clientName.toString() == messageItem.sender)
+                                                    Shape.FirstMessageShapeEnd()
+                                                else
+                                                    Shape.FirstMessageShapeStart()
+                                        }
 
-                                                else -> if (controller.clientId.toString() == messageItem.sender) {
-                                                    RoundedCornerShape(22.dp, 6.dp, 6.dp, 22.dp)
+                                        controller.messageList.lastIndex -> {
+                                            if (controller.clientName.toString() == messageItem.sender)
+                                                Shape.LastMessageShapeEnd()
+                                            else
+                                                Shape.LastMessageShapeStart()
+                                        }
+
+                                        else -> {
+                                            if (controller.clientName.toString() == messageItem.sender) {
+                                                if (controller.messageList[controller.messageList.indexOf(messageItem) + 1].sender != messageItem.sender) {
+                                                    Shape.LastMessageShapeEnd()
+                                                } else if (controller.messageList[controller.messageList.indexOf(messageItem) - 1].sender != messageItem.sender) {
+                                                    Shape.FirstMessageShapeEnd()
                                                 } else {
-                                                    RoundedCornerShape(6.dp, 22.dp, 22.dp, 6.dp)
+                                                    Shape.MiddleMessageShapeEnd()
+                                                }
+                                            } else {
+                                                if (controller.messageList[controller.messageList.indexOf(messageItem) + 1].sender != messageItem.sender) {
+                                                    Shape.LastMessageShapeStart()
+                                                } else if (controller.messageList[controller.messageList.indexOf(messageItem) - 1].sender != messageItem.sender) {
+                                                    Shape.FirstMessageShapeStart()
+                                                }  else {
+                                                    Shape.MiddleMessageShapeStart()
                                                 }
                                             }
-                                        ),
-                                    align = if (controller.clientId.toString() == messageItem.sender) {
-                                        Alignment.CenterEnd
-                                    } else {
-                                        Alignment.CenterStart
+                                        }
                                     }
-                                )
+
+                                    MessageBubble(
+                                        message = messageItem,
+                                        modifier = Modifier
+                                            .background(
+                                                applicationColorScheme.secondaryContainer.copy(0.6f),
+                                                bubbleShape
+                                            ),
+                                        align = if (controller.clientName.toString() == messageItem.sender) {
+                                            Alignment.CenterEnd
+                                        } else {
+                                            Alignment.CenterStart
+                                        }
+                                    )
+                                }
                             }
                         }
 
