@@ -1,6 +1,7 @@
 package ru.tanexc.application.domain.interfaces
 
 import domain.model.Chat
+import domain.model.Message
 
 interface ChatDao {
     suspend fun insert(chat: Chat): Chat?
@@ -12,4 +13,6 @@ interface ChatDao {
     suspend fun edit(chat: Chat)
 
     suspend fun getAll(): List<Chat>
+
+    suspend fun insertMessage(chatId: Long, message: Message)
 }
