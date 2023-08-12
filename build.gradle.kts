@@ -99,6 +99,9 @@ kotlin {
                 // Serialization
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
+                //implementation("org.jetbrains.compose.material:material-icons-core-js:1.4.3")
+                //implementation("org.jetbrains.compose.material:material-icons-extended-js:1.4.3")
+
                 dependsOn(commonMain)
             }
 
