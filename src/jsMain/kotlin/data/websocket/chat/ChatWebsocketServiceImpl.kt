@@ -54,6 +54,8 @@ class ChatWebsocketServiceImpl : WebsocketService<Message> {
             path = "$CHAT_WEBSOCKET?clientId=$clientId&clientName=$clientName&userId=$userId"
         )
 
+        println(session)
+
         return session
             ?.let { session ->
                 session.incoming

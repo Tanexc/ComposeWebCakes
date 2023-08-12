@@ -52,8 +52,7 @@ class ChatConnectionController(
                 if (data.text != "") {
                     try {
                         val message: Message = messageDao.insert(data) ?: disconnect(session, chat.id, InvalidData())
-                        chat = chat.copy(messages = chat.messages + message.id)
-                        chatDao.edit(chat)
+                        chatDao.insertMessage(chat.id, message)
                         sendMessage(chat.id, message)
                     } catch (e: Exception) {
                         disconnect(session, chat.id, e)
@@ -83,7 +82,7 @@ class ChatConnectionController(
         if (chatId in data.keys) {
             data[chatId] = data[chatId]!!.minus(session)
         }
-        println("dissconnect")
+
         throw exception?: Disconnected()
     }
 
