@@ -36,4 +36,17 @@ class ChatRepositoryImpl: ChatRepository {
             }
         }
     }
+
+    override fun getAll(value: String): Flow<State<List<Chat>>> = flow {
+        emit(State.Processing())
+        val respond = chatApi.getAll(value)
+        when(val listChat = respond.data) {
+            is List<Chat> -> {
+                emit(State.Success(listChat))
+            }
+            else -> {
+                emit(State.Error(message = respond.message?: "get all chats error"))
+            }
+        }
+    }
 }

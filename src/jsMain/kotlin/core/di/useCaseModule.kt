@@ -7,6 +7,7 @@ import domain.repository.ChatRepository
 import domain.repository.MessageRepository
 import domain.repository.UserRepository
 import domain.use_case.chat.ChatCreateUseCase
+import domain.use_case.chat.ChatGetAllUseCase
 import domain.use_case.chat.ChatGetByClientIdUseCase
 import domain.use_case.message.MessageGetByClientIdUseCase
 import domain.use_case.message.MessageGetByIdUseCase
@@ -20,6 +21,7 @@ val useCaseModule = module {
 
     single { ChatGetByClientIdUseCase() }
     single { ChatCreateUseCase() }
+    single { ChatGetAllUseCase() }
 
     single { UserGetByIdUseCase() }
     single { UserSignInUseCase() }
