@@ -32,4 +32,12 @@ class ChatApiImpl : ChatApi {
                 )
             )
         }.body()
+
+    override suspend fun getAll(value: String): RespondData<List<Chat>> = client.get(urlString = "http://${Application.HOST}/${Api.GET_ALL_CHATS}") {
+        url.parameters.appendAll(
+            parametersOf(
+                "token" to listOf(value)
+            )
+        )
+    }.body()
 }

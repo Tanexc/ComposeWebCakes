@@ -8,4 +8,6 @@ interface ChatApi: KoinComponent {
     suspend fun getChatByClientId(clientId: String): RespondData<Chat>
 
     suspend fun createChat(clientId: String, title: String): RespondData<Chat>
+
+    suspend fun getAll(value: String): RespondData<List<Chat>>
 }
