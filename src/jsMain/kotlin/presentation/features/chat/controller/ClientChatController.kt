@@ -1,8 +1,6 @@
 package presentation.features.chat.controller
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import core.util.Dialogs
 import data.websocket.chat.ChatWebsocketServiceImpl
 import domain.model.Chat
@@ -13,9 +11,8 @@ import domain.use_case.chat.ChatGetByClientIdUseCase
 import domain.use_case.message.MessageGetByClientIdUseCase
 import domain.use_case.message.MessageGetByIdUseCase
 import io.ktor.util.date.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.first
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import util.State
@@ -139,10 +136,6 @@ class ClientChatController : KoinComponent {
         }
     }
 
-    suspend fun getMessageById(id: Long): Message? {
-        return getMessageByIdUseCase(id).data
-    }
-
     fun sendMessage(text: String, replyTo: Long? = null) {
         CoroutineScope(Dispatchers.Default).launch {
             clientName?.let { sender -> chatWebsocketService.send(
@@ -171,4 +164,10 @@ class ClientChatController : KoinComponent {
         _dialogToShow.value = Dialogs.None
     }
 
+    fun setDialog(value: Dialogs, message: String) {
+        _dialogToShow.value = value
+        _dialogMessage.value = message
+    }
+
+    suspend fun getMessageById(id: Long): Message? = getMessageByIdUseCase(id).first().data
 }
