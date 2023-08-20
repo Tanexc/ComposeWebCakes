@@ -6,7 +6,7 @@ import org.koin.core.component.KoinComponent
 import util.State
 
 interface MessageRepository: KoinComponent {
-    suspend fun getById(id: Long): State<Message>
+    fun getById(id: Long): Flow<State<Message>>
 
     fun getByClientId(clientId: String): Flow<State<List<Message>>>
 }
