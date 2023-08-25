@@ -1,6 +1,7 @@
 package ru.tanexc.application.presentation.server.configuration.routes
 
 
+import io.ktor.http.ContentDisposition.Companion.File
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.routing.*
@@ -9,6 +10,7 @@ import ru.tanexc.application.presentation.features.api.messageApi.messageApi
 import ru.tanexc.application.presentation.features.api.userApi.userApi
 import ru.tanexc.application.presentation.features.websocket.chatWebsocket.chatWebsocket
 import ru.tanexc.application.presentation.ui.baseUiRoute
+import java.io.File
 
 fun Application.configureRoutes() = routing {
 
@@ -28,4 +30,6 @@ fun Application.configureRoutes() = routing {
         remotePath = "/static",
         basePackage = null
     )
+
+    staticFiles("/resources/images", dir = File("data/images"))
 }

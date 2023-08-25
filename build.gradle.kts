@@ -81,6 +81,10 @@ kotlin {
 
                 // Bcrypt
                 implementation("at.favre.lib:bcrypt:0.10.2")
+
+                // WindowSizeClass
+                implementation("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.3.0")
+
             }
         }
 
