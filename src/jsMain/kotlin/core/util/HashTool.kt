@@ -1,6 +1,7 @@
 package core.util
 
 import io.ktor.util.*
+import io.ktor.util.date.*
 import org.jetbrains.skiko.currentNanoTime
 import kotlin.random.Random
 
@@ -11,9 +12,7 @@ object HashTool {
 
     @OptIn(InternalAPI::class)
     suspend fun getHashByteArray(value: String): ByteArray {
-        return digest.build(
-            value
-        )
+        return digest.build(value)
     }
 
     private suspend fun getHashPart(values: List<String>, length: Int = Int.MAX_VALUE): String {
@@ -28,7 +27,7 @@ object HashTool {
     suspend fun generateClientId(): String {
         return getHashPart(
             listOf(
-                currentNanoTime().toString(),
+                getTimeMillis().toString(),
                 Random.nextLong(1000000).toString(),
                 Random.nextBytes(100).toString()
                 )
