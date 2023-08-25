@@ -3,6 +3,9 @@ package presentation.features.application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass.Companion.Compact
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,20 +24,20 @@ import presentation.style.ui.theme.applicationColorScheme
 import presentation.style.ui.theme.applicationUseDarkTheme
 
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun ClientMainApp() {
     val controller = remember { MainController() }
 
+    val windowSize = calculateWindowSizeClass()
+
     ClientTheme(applicationUseDarkTheme) {
-        Scaffold {
-            Row {
-                Column {
-                    NavigationRail(
-                        modifier = Modifier
-                            .background(applicationColorScheme.secondaryContainer)
-                    ) {
+        Scaffold(
+            bottomBar = {
+                if (windowSize.widthSizeClass == Compact) {
+                    NavigationBar {
                         controller.items.forEach {
-                            NavigationRailItem(
+                            NavigationBarItem(
                                 modifier = Modifier
                                     .padding(8.dp),
                                 selected = controller.currentScreen == it,
@@ -69,6 +72,52 @@ fun ClientMainApp() {
                         }
                     }
                 }
+            }
+        ) {
+            Row {
+                if (windowSize.widthSizeClass != Compact) {
+                    Column {
+                        NavigationRail(
+                            modifier = Modifier
+                                .background(applicationColorScheme.secondaryContainer)
+                        ) {
+                            controller.items.forEach {
+                                NavigationRailItem(
+                                    modifier = Modifier
+                                        .padding(8.dp),
+                                    selected = controller.currentScreen == it,
+                                    icon = {
+                                        Icon(
+                                            if (it.label == controller.currentScreen.label) {
+                                                it.iconFilled
+                                            } else {
+                                                it.iconOutlined
+                                            },
+                                            contentDescription = applicationResources(it.label)
+                                        )
+                                    },
+                                    label = {
+                                        Text(
+                                            applicationResources(it.label),
+                                            fontSize = Typography.labelSmall.fontSize,
+                                            fontWeight =
+                                            if (it.label == controller.currentScreen.label) {
+                                                FontWeight.Bold
+                                            } else {
+                                                FontWeight.Medium
+                                            }
+                                        )
+                                    },
+                                    onClick = {
+                                        controller.updateScreen(it)
+                                    },
+                                    alwaysShowLabel = true
+                                )
+
+                            }
+                        }
+                    }
+                }
                 Column {
                     Spacer(
                         modifier = Modifier
@@ -88,9 +137,6 @@ fun ClientMainApp() {
                             if (controller.user != null)
                             ChatScreen(controller.user!!)
                             else ChatScreen()
-                        }
-                        is Screen.FeedBack -> {
-                            Text("FEEDBACK")
                         }
 
                         is Screen.Settings -> {
