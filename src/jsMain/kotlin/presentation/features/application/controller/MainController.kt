@@ -32,7 +32,6 @@ class MainController: KoinComponent {
 
     val items = listOf(
         Screen.Info,
-        Screen.FeedBack,
         Screen.Chat,
         Screen.Settings
     )
