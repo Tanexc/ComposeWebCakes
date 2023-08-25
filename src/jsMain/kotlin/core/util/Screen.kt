@@ -30,12 +30,6 @@ sealed class Screen(
         iconFilled = IconFilledAssessment
     )
 
-    data object FeedBack: Screen(
-        label = Strings.feedback,
-        iconOutlined = IconOutlinedThumbUp,
-        iconFilled = IconFilledThumbUp
-    )
-
     data object Settings: Screen(
         label = Strings.settings,
         iconOutlined = Icons.Outlined.Settings,
