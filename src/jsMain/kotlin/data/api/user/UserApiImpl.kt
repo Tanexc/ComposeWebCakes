@@ -7,7 +7,7 @@ import constants.Api.SIGN_UP_USER
 import constants.Api.UPDATE_CHATS_USER
 import constants.Api.UPDATE_PASSWORD
 import constants.Application.HOST
-import domain.interfaces.UserApi
+import domain.interfaces.api.UserApi
 import domain.model.RespondData
 import domain.model.User
 import io.ktor.client.*
@@ -15,7 +15,6 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
-import io.ktor.http.content.*
 import io.ktor.util.*
 import org.koin.core.component.inject
 

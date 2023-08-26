@@ -1,4 +1,4 @@
-package domain.interfaces
+package domain.interfaces.api
 
 import domain.model.Chat
 import domain.model.RespondData

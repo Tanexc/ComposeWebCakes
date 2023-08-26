@@ -1,6 +1,6 @@
 package data.repository
 
-import domain.interfaces.ChatApi
+import domain.interfaces.api.ChatApi
 import domain.model.Chat
 import domain.repository.ChatRepository
 import kotlinx.coroutines.flow.Flow

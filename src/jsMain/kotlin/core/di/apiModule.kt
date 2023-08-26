@@ -3,9 +3,9 @@ package core.di
 import data.api.chat.ChatApiImpl
 import data.api.message.MessageApiImpl
 import data.api.user.UserApiImpl
-import domain.interfaces.ChatApi
-import domain.interfaces.MessageApi
-import domain.interfaces.UserApi
+import domain.interfaces.api.ChatApi
+import domain.interfaces.api.MessageApi
+import domain.interfaces.api.UserApi
 import org.koin.dsl.module
 
 val apiModule = module {

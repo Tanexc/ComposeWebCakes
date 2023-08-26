@@ -1,6 +1,6 @@
 package data.repository
 
-import domain.interfaces.UserApi
+import domain.interfaces.api.UserApi
 import domain.model.User
 import domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow

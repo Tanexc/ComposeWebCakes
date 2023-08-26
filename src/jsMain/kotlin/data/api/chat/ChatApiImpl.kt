@@ -2,7 +2,7 @@ package data.api.chat
 
 import constants.Api
 import constants.Application
-import domain.interfaces.ChatApi
+import domain.interfaces.api.ChatApi
 import domain.model.Chat
 import domain.model.RespondData
 import io.ktor.client.*

@@ -2,7 +2,7 @@ package data.api.message
 
 import constants.Api
 import constants.Application
-import domain.interfaces.MessageApi
+import domain.interfaces.api.MessageApi
 import domain.model.Message
 import domain.model.RespondData
 import io.ktor.client.*

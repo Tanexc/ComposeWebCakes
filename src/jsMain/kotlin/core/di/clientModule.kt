@@ -4,8 +4,8 @@ import data.api.chat.ChatApiImpl
 import data.api.user.UserApiImpl
 import data.repository.ClientRepositoryImpl
 import data.websocket.chat.ChatWebsocketServiceImpl
-import domain.interfaces.ChatApi
-import domain.interfaces.UserApi
+import domain.interfaces.api.ChatApi
+import domain.interfaces.api.UserApi
 import domain.repository.ClientRepository
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*

@@ -1,6 +1,6 @@
 package data.repository
 
-import domain.interfaces.MessageApi
+import domain.interfaces.api.MessageApi
 import domain.model.Message
 import domain.repository.MessageRepository
 import kotlinx.coroutines.flow.Flow

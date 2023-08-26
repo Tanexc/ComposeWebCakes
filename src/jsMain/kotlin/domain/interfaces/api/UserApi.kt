@@ -1,4 +1,4 @@
-package domain.interfaces
+package domain.interfaces.api
 
 import domain.model.RespondData
 import domain.model.User
