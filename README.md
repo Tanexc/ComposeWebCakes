@@ -1,5 +1,5 @@
 # <p align="center"> ComposeWebCakes </p>
-<p align="center"> ⚠️ Work in progress ⚠️</p>
+<p align="center">A web application that shows the use of a ktor-based server and a compose-based user interface by implementing an untitled cake company website with a business card and a support chat</p>
 
 # License
 ```xml
